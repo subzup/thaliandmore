@@ -1,0 +1,106 @@
+<div class="container">
+  <%- include('../partials/breadcrumbs', { crumbs: [{ label: 'Home', path: '/' }, { label: 'Plans', path: '/plans' }, { label: plan.name }] }) %>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": <%- JSON.stringify(plan.name + ' - ' + site.name) %>,
+  "description": <%- JSON.stringify(details.metaDescription) %>,
+  "offers": {
+    "@type": "Offer",
+    "url": "<%= site.url %>/plans/<%= plan.id %>",
+    "priceCurrency": "INR",
+    "price": "<%= plan.pricing.monthly %>",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<section class="page-hero" style="text-align:left; padding-bottom:1.5rem;">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: plan.icon, cls: 'inline-icon' }) %> <%= plan.name %></p>
+    <h1 data-aos="fade-up"><%= plan.tagline %></h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100"><%= details.whyThisPlan %></p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container plan-detail-grid">
+    <div class="content-block" data-aos="fade-right">
+      <h2>Ideal For</h2>
+      <ul class="check-list">
+        <% details.idealFor.forEach(function(p) { %>
+          <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> <%= p %></li>
+        <% }); %>
+      </ul>
+
+      <h2 style="margin-top:2rem;"><%= details.sampleDay.label %></h2>
+      <ul class="check-list">
+        <% details.sampleDay.items.forEach(function(item) { %>
+          <li><%- include('../partials/icon', { name: 'utensils', cls: 'inline-icon' }) %> <%= item %></li>
+        <% }); %>
+      </ul>
+
+      <h2 style="margin-top:2rem;">Nutrition Approach</h2>
+      <p><%= details.nutritionNote %></p>
+
+      <h2 style="margin-top:2rem;">FAQ: <%= plan.name %></h2>
+      <div class="accordion">
+        <% details.faq.forEach(function(item) { %>
+          <div class="accordion__item">
+            <button type="button" class="accordion__trigger" aria-expanded="false">
+              <span><%= item.question %></span>
+              <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+            </button>
+            <div class="accordion__panel">
+              <p><%= item.answer %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <aside data-aos="fade-left">
+      <div class="info-card" style="margin-bottom:1.25rem;">
+        <h3><%- include('../partials/icon', { name: 'wallet', cls: 'inline-icon' }) %> Pricing</h3>
+        <div class="plan-card__price" style="margin-bottom:0.5rem;">
+          <span class="plan-card__original">&#8377;<%= plan.pricing.monthlyOriginal.toLocaleString('en-IN') %></span>
+          <span class="plan-card__amount">&#8377;<%= plan.pricing.monthly.toLocaleString('en-IN') %></span>
+          <span class="plan-card__period">/month</span>
+        </div>
+        <p class="plan-card__permeal">&#8377;<%= plan.pricing.perMeal %> per meal &middot; <%= plan.frequency %></p>
+        <a href="/#trial" class="btn btn--primary btn--block">Start 7-Day Trial</a>
+      </div>
+
+      <div class="info-card">
+        <h3><%- include('../partials/icon', { name: 'list-checks', cls: 'inline-icon' }) %> What's Included</h3>
+        <ul>
+          <% plan.features.forEach(function(f) { %>
+            <li><%- include('../partials/icon', { name: 'check', cls: 'inline-icon icon-sm' }) %> <%= f %></li>
+          <% }); %>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Compare Plans</p>
+      <h2>Other Plans</h2>
+    </div>
+    <div class="grid grid--3">
+      <% otherPlans.forEach(function(p, i) { %>
+        <div class="plan-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="plan-card__icon"><%- include('../partials/icon', { name: p.icon }) %></div>
+          <h3><%= p.name %></h3>
+          <p class="plan-card__price"><span class="plan-card__amount">&#8377;<%= p.pricing.monthly.toLocaleString('en-IN') %></span><span class="plan-card__period">/month</span></p>
+          <a href="/plans/<%= p.id %>" class="btn btn--outline btn--block">View Details</a>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>

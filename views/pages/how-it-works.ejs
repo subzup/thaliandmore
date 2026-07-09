@@ -62,7 +62,7 @@
           <div class="plan-card__icon"><%- include('../partials/icon', { name: p.icon }) %></div>
           <h3><%= p.name %></h3>
           <p class="plan-card__price"><span class="plan-card__amount">&#8377;<%= p.pricing.monthly.toLocaleString('en-IN') %></span><span class="plan-card__period">/month</span></p>
-          <a href="/plans#<%= p.id %>" class="btn btn--outline btn--block">View Details</a>
+          <a href="/plans/<%= p.id %>" class="btn btn--outline btn--block">View Details</a>
         </div>
       <% }); %>
     </div>

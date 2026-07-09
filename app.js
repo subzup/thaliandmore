@@ -10,6 +10,8 @@ const expressLayouts = require('express-ejs-layouts');
 const pageRoutes = require('./routes/pages');
 const apiRoutes = require('./routes/api');
 const seoRoutes = require('./routes/seo');
+const locationRoutes = require('./routes/locations');
+const blogRoutes = require('./routes/blog');
 const pageController = require('./controllers/pageController');
 
 const app = express();
@@ -40,6 +42,8 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1d' }));
 // Routes
 app.use('/', seoRoutes);
 app.use('/api', apiRoutes);
+app.use('/', locationRoutes);
+app.use('/', blogRoutes);
 app.use('/', pageRoutes);
 
 // 404 handler

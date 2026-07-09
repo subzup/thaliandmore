@@ -1,0 +1,38 @@
+<%
+// `crumbs` is an array of { label, path } with the final entry being the
+// current page (no path needed on the last one). Emits both a visible trail
+// and BreadcrumbList schema for rich results.
+const items = typeof crumbs !== 'undefined' ? crumbs : [];
+%>
+<% if (items.length) { %>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list">
+    <% items.forEach(function(item, i) { %>
+      <li class="breadcrumbs__item">
+        <% if (item.path && i < items.length - 1) { %>
+          <a href="<%= item.path %>"><%= item.label %></a>
+          <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+        <% } else { %>
+          <span aria-current="page"><%= item.label %></span>
+        <% } %>
+      </li>
+    <% }); %>
+  </ol>
+</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    <% items.forEach(function(item, i) { %>
+    {
+      "@type": "ListItem",
+      "position": <%= i + 1 %>,
+      "name": <%- JSON.stringify(item.label) %><% if (item.path) { %>,
+      "item": <%- JSON.stringify(site.url + item.path) %><% } %>
+    }<%= i < items.length - 1 ? ',' : '' %>
+    <% }); %>
+  ]
+}
+</script>
+<% } %>

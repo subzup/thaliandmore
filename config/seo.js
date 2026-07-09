@@ -68,6 +68,18 @@ const pages = {
     description: 'The page you are looking for could not be found.',
     path: '/404',
   },
+  locationsIndex: {
+    title: `Where We Deliver: New Town, Sector V, Salt Lake & Rajarhat${suffix}`,
+    description:
+      'Thali & More delivers healthy home-style meal subscriptions across New Town, Sector V, Salt Lake and Rajarhat. Find delivery details for your area.',
+    path: '/locations',
+  },
+  blogIndex: {
+    title: `Blog: Healthy Eating & Meal Planning Guides${suffix}`,
+    description:
+      'Practical guides on healthy eating, protein intake, meal planning and daily food logistics for professionals and families in Kolkata.',
+    path: '/blog',
+  },
 };
 
 function buildMeta(key) {
@@ -80,4 +92,17 @@ function buildMeta(key) {
   };
 }
 
-module.exports = { pages, buildMeta };
+// For data-driven pages (locations, plan details, blog posts) whose meta
+// comes from config/data/* rather than the static `pages` map above.
+function buildDynamicMeta({ title, description, path, ogImage }) {
+  return {
+    title,
+    description,
+    path,
+    url: `${site.url}${path}`,
+    ogImage: ogImage ? `${site.url}${ogImage}` : `${site.url}${defaultOgImage}`,
+    siteName: site.name,
+  };
+}
+
+module.exports = { pages, buildMeta, buildDynamicMeta, defaultOgImage };

@@ -1,0 +1,117 @@
+<div class="container">
+  <%- include('../partials/breadcrumbs', { crumbs: [{ label: 'Home', path: '/' }, { label: 'Locations', path: '/locations' }, { label: location.name }] }) %>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": "<%= site.name %> - <%= location.name %> Delivery",
+  "url": "<%= site.url %>/locations/<%= location.slug %>",
+  "telephone": "<%= site.contact.phoneHref %>",
+  "servesCuisine": "Indian, Home-Style, Vegetarian",
+  "priceRange": "₹₹",
+  "areaServed": <%- JSON.stringify(location.name) %>,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "<%= site.kitchen.addressLine %>",
+    "addressRegion": "<%= site.kitchen.addressRegion %>",
+    "postalCode": "<%= site.kitchen.postalCode %>",
+    "addressCountry": "<%= site.kitchen.country %>"
+  }
+}
+</script>
+
+<section class="page-hero" style="text-align:left; padding-bottom:1.5rem;">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'map-pin', cls: 'inline-icon' }) %> Delivering to <%= location.name %></p>
+    <h1 data-aos="fade-up"><%= location.heroTagline %></h1>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container location-grid">
+    <div class="content-block" data-aos="fade-right">
+      <% location.intro.forEach(function(para) { %>
+        <p><%= para %></p>
+      <% }); %>
+
+      <h2 style="margin-top:2rem;">Frequently Asked in <%= location.name %></h2>
+      <div class="accordion">
+        <% location.localFaq.forEach(function(item) { %>
+          <div class="accordion__item">
+            <button type="button" class="accordion__trigger" aria-expanded="false">
+              <span><%= item.question %></span>
+              <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+            </button>
+            <div class="accordion__panel">
+              <p><%= item.answer %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+
+      <% if (testimonials.length) { %>
+        <h2 style="margin-top:2.5rem;">What <%= location.name %> Subscribers Say</h2>
+        <div class="grid grid--2">
+          <% testimonials.forEach(function(t) { %>
+            <div class="testimonial-card testimonial-card--static">
+              <div class="testimonial-card__stars">
+                <% for (let s = 0; s < t.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+              </div>
+              <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
+              <div class="testimonial-card__author">
+                <strong><%= t.name %></strong>
+                <span><%= t.role %></span>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+
+    <aside data-aos="fade-left">
+      <div class="info-card" style="margin-bottom:1.25rem;">
+        <h3><%- include('../partials/icon', { name: 'clock', cls: 'inline-icon' }) %> Delivery Details</h3>
+        <ul>
+          <li><%- include('../partials/icon', { name: 'check', cls: 'inline-icon icon-sm' }) %> <%= location.deliveryNote %></li>
+          <li><%- include('../partials/icon', { name: 'truck', cls: 'inline-icon icon-sm' }) %> <%= location.distanceNote %></li>
+        </ul>
+      </div>
+
+      <div class="info-card" style="margin-bottom:1.25rem;">
+        <h3><%- include('../partials/icon', { name: 'building-2', cls: 'inline-icon' }) %> Covers</h3>
+        <ul>
+          <% location.landmarks.forEach(function(l) { %>
+            <li><%- include('../partials/icon', { name: 'map-pin', cls: 'inline-icon icon-sm' }) %> <%= l %></li>
+          <% }); %>
+        </ul>
+      </div>
+
+      <div class="info-card" style="margin-bottom:1.25rem;">
+        <h3><%- include('../partials/icon', { name: 'users', cls: 'inline-icon' }) %> Popular With</h3>
+        <ul>
+          <% location.idealFor.forEach(function(p) { %>
+            <li><%- include('../partials/icon', { name: 'check', cls: 'inline-icon icon-sm' }) %> <%= p %></li>
+          <% }); %>
+        </ul>
+      </div>
+
+      <a href="/#trial" class="btn btn--primary btn--block btn--lg">Start 7-Day Trial in <%= location.name %></a>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Other Areas We Serve</p>
+      <h2>More Delivery Locations</h2>
+    </div>
+    <div class="locality-links" style="justify-content:center;" data-aos="fade-up">
+      <% otherLocations.forEach(function(loc) { %>
+        <a href="/locations/<%= loc.slug %>" class="pill"><%- include('../partials/icon', { name: 'map-pin', cls: 'inline-icon' }) %> <%= loc.name %></a>
+      <% }); %>
+    </div>
+  </div>
+</section>

@@ -40,6 +40,7 @@
           </ul>
 
           <a href="/#trial" class="btn <%= p.popular ? 'btn--primary' : 'btn--outline' %> btn--block">Start 7-Day Trial</a>
+          <a href="/plans/<%= p.id %>" class="btn btn--ghost" style="margin-top:0.5rem; justify-content:center;">Full details &amp; sample day <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
         </div>
       <% }); %>
     </div>

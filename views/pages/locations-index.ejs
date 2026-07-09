@@ -1,0 +1,36 @@
+<div class="container">
+  <%- include('../partials/breadcrumbs', { crumbs: [{ label: 'Home', path: '/' }, { label: 'Locations' }] }) %>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'map-pin', cls: 'inline-icon' }) %> Delivery Areas</p>
+    <h1 data-aos="fade-up">Where We Deliver</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">Thali & More delivers fresh, home-style meals daily across four localities from our Mahishbathan kitchen. Pick your area for delivery timing, coverage and local FAQs.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid--2">
+    <% locations.forEach(function(loc, i) { %>
+      <a href="/locations/<%= loc.slug %>" class="blog-card" data-aos="fade-up" data-aos-delay="<%= (i % 2) * 100 %>" style="display:block;">
+        <h3><%= loc.name %></h3>
+        <p class="blog-card__excerpt"><%= loc.heroTagline %></p>
+        <span class="blog-card__link">View delivery details <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></span>
+      </a>
+    <% }); %>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container final-cta__box glass-card" data-aos="zoom-in">
+    <h2>Not Sure If We Deliver to You?</h2>
+    <p>Message us your address on WhatsApp and we'll confirm coverage the same day.</p>
+    <div class="hero__ctas">
+      <a href="https://wa.me/<%= site.whatsapp.number %>" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+        <%- include('../partials/icon', { name: 'whatsapp', cls: 'inline-icon' }) %> Chat on WhatsApp
+      </a>
+      <a href="/#trial" class="btn btn--outline btn--lg">Start 7-Day Trial</a>
+    </div>
+  </div>
+</section>

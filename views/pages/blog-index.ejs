@@ -1,0 +1,24 @@
+<div class="container">
+  <%- include('../partials/breadcrumbs', { crumbs: [{ label: 'Home', path: '/' }, { label: 'Blog' }] }) %>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'sparkles', cls: 'inline-icon' }) %> Guides &amp; Insights</p>
+    <h1 data-aos="fade-up">The Thali &amp; More Blog</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">Practical guides on healthy eating, protein intake, and daily meal logistics for professionals and families in Kolkata.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid--3">
+    <% posts.forEach(function(post, i) { %>
+      <a href="/blog/<%= post.slug %>" class="blog-card" data-aos="fade-up" data-aos-delay="<%= (i % 3) * 100 %>" style="display:block;">
+        <p class="blog-card__meta"><%= new Date(post.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }) %> &middot; <%= post.readMinutes %> min read</p>
+        <h3><%= post.title %></h3>
+        <p class="blog-card__excerpt"><%= post.excerpt %></p>
+        <span class="blog-card__link">Read more <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></span>
+      </a>
+    <% }); %>
+  </div>
+</section>

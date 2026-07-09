@@ -22,6 +22,7 @@
         <li><a href="/why-choose-us">Why Choose Us</a></li>
         <li><a href="/testimonials">Testimonials</a></li>
         <li><a href="/faq">FAQ</a></li>
+        <li><a href="/blog">Blog</a></li>
       </ul>
     </div>
 
@@ -29,8 +30,9 @@
       <h3 class="footer__heading">We Deliver To</h3>
       <ul class="footer__links">
         <% site.locales.forEach(function(loc) { %>
-          <li><%= loc %></li>
+          <li><a href="/locations/<%= loc.toLowerCase().replace(/\s+/g, '-') %>"><%= loc %></a></li>
         <% }); %>
+        <li><a href="/locations">All Locations</a></li>
       </ul>
     </div>
 
