@@ -31,6 +31,10 @@ public/
 storage/leads.json       lead submissions (trial/contact/newsletter), gitignored
 ```
 
+## Deployment
+
+See [DEPLOY.md](DEPLOY.md) for VPS (PM2 + Nginx + HTTPS) and PaaS deployment instructions.
+
 ## Notes
 
 - Leads are appended to `storage/leads.json`. Swap `controllers/leadController.js` for a real CRM/email/Sheets integration before launch.
