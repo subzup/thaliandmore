@@ -377,6 +377,13 @@ p { color: var(--color-ink-soft); }
 .sticky-cta__info span { font-size: 0.78rem; color: var(--color-ink-muted); }
 .sticky-cta .btn { flex-shrink: 0; }
 
+/* The sticky bar is position:fixed, so it doesn't reserve space in normal
+   flow. Without this, it sits on top of whatever page content (e.g. the
+   hero's "View Plans" button) happens to land in that viewport strip. */
+@media (max-width: 1023px) {
+  body { padding-bottom: 5.5rem; }
+}
+
 @media (min-width: 1024px) {
   .sticky-cta { display: none; }
   .floating-actions { right: 1.75rem; bottom: 1.75rem; }
