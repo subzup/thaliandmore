@@ -354,7 +354,9 @@ p { color: var(--color-ink-soft); }
 .modal__disclaimer { font-size: 0.75rem; color: var(--color-ink-muted); text-align: center; margin-top: 0.75rem; }
 
 /* ---------- 15. Floating actions + sticky mobile CTA ---------- */
-.floating-actions { position: fixed; right: 1.1rem; bottom: 1.1rem; display: flex; flex-direction: column; gap: 0.75rem; z-index: 90; }
+/* Below 1024px the sticky trial bar (z-index 95) sits on top of the floating
+   WhatsApp/call/back-to-top buttons unless they're pushed up above its height. */
+.floating-actions { position: fixed; right: 1.1rem; bottom: calc(6.25rem + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 0.75rem; z-index: 90; }
 .floating-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: transform var(--transition); }
 .floating-btn:hover { transform: scale(1.08); }
 .floating-btn .icon { width: 24px; height: 24px; }
@@ -366,6 +368,7 @@ p { color: var(--color-ink-soft); }
 .sticky-cta {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; background: #fff; border-top: 1px solid var(--color-border);
   display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.1rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
   box-shadow: 0 -8px 24px rgba(26,32,44,0.08); transform: translateY(0); transition: transform var(--transition);
 }
 .sticky-cta.is-hidden { transform: translateY(110%); }
