@@ -375,7 +375,10 @@ p { color: var(--color-ink-soft); }
 .sticky-cta__info { display: flex; flex-direction: column; line-height: 1.2; }
 .sticky-cta__info strong { font-family: var(--font-heading); font-size: 0.95rem; }
 .sticky-cta__info span { font-size: 0.78rem; color: var(--color-ink-muted); }
-.sticky-cta .btn { flex-shrink: 0; }
+/* Overrides .btn--block's width:100% (which resolves against the whole flex
+   container, not the remaining space) so this button doesn't overflow past
+   the "7-Day Trial" label and get clipped by the viewport edge. */
+.sticky-cta .btn { flex: 1 1 auto; width: auto; min-width: 0; }
 
 /* The sticky bar is position:fixed, so it doesn't reserve space in normal
    flow. Without this, it sits on top of whatever page content (e.g. the
