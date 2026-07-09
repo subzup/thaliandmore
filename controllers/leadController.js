@@ -17,9 +17,20 @@ function readLeads() {
 }
 
 function appendLead(entry) {
-  const leads = readLeads();
-  leads.push({ ...entry, createdAt: new Date().toISOString() });
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2));
+  const record = { ...entry, createdAt: new Date().toISOString() };
+
+  // Always log the lead so it's captured in platform logs (e.g. `vercel logs`)
+  // even when the write below fails, since serverless platforms like Vercel
+  // ship a read-only filesystem outside /tmp.
+  console.log('[LEAD]', JSON.stringify(record));
+
+  try {
+    const leads = readLeads();
+    leads.push(record);
+    fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2));
+  } catch (err) {
+    console.error('[LEAD] could not persist to', LEADS_FILE, '-', err.message);
+  }
 }
 
 function wantsJson(req) {
