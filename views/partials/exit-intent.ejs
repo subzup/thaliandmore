@@ -1,0 +1,25 @@
+<!-- Exit-intent popup: triggered by JS (public/js/main.js) on mouse-leave / inactivity -->
+<div class="modal" id="exitIntentModal" hidden>
+  <div class="modal__backdrop" data-close-modal></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="exitIntentTitle">
+    <button type="button" class="modal__close" aria-label="Close" data-close-modal>
+      <%- include('./icon', { name: 'x' }) %>
+    </button>
+    <div class="modal__badge"><%- include('./icon', { name: 'gift' }) %> Limited Offer</div>
+    <h3 class="modal__title" id="exitIntentTitle">Wait! Get &#8377;100 Off Your First Trial</h3>
+    <p class="modal__subtitle">Join <%= site.stats.subscribers.toLocaleString('en-IN') %>+ happy subscribers in New Town, Sector V, Salt Lake &amp; Rajarhat.</p>
+
+    <form class="lead-form" id="exitIntentForm" data-endpoint="/api/trial">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="tel" name="phone" placeholder="Mobile Number" pattern="[6-9][0-9]{9}" maxlength="10" required>
+      <select name="locality" required>
+        <option value="" disabled selected>Select Your Area</option>
+        <% site.locales.forEach(function(loc) { %><option value="<%= loc %>"><%= loc %></option><% }); %>
+      </select>
+      <input type="hidden" name="plan" value="Exit Intent Offer">
+      <button type="submit" class="btn btn--primary btn--block">Claim My Discount</button>
+    </form>
+    <p class="lead-form__status" role="status" aria-live="polite"></p>
+    <p class="modal__disclaimer">No spam. Cancel your subscription anytime.</p>
+  </div>
+</div>

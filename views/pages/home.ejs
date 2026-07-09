@@ -1,0 +1,241 @@
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__content" data-aos="fade-up">
+      <p class="eyebrow"><%- include('../partials/icon', { name: 'sparkles', cls: 'inline-icon' }) %> Now serving New Town, Sector V, Salt Lake &amp; Rajarhat</p>
+      <h1 class="hero__title">Stop Wondering What to Eat Every Day.</h1>
+      <p class="hero__subtitle">Healthy home-style meals delivered to your home or office. Freshly prepared every single day, with no cooking and no daily ordering. Just subscribe and enjoy.</p>
+
+      <div class="hero__ctas">
+        <a href="#trial" class="btn btn--primary btn--lg">
+          <%= site.trial.label %> for &#8377;<%= site.trial.price %>
+        </a>
+        <a href="/plans" class="btn btn--outline btn--lg">View Plans</a>
+      </div>
+
+      <div class="hero__trust">
+        <div class="hero__trust-item">
+          <strong><%= site.stats.subscribers.toLocaleString('en-IN') %>+</strong>
+          <span>Happy Subscribers</span>
+        </div>
+        <div class="hero__trust-divider"></div>
+        <div class="hero__trust-item">
+          <strong><%= (site.stats.mealsDelivered/1000).toFixed(0) %>K+</strong>
+          <span>Meals Delivered</span>
+        </div>
+        <div class="hero__trust-divider"></div>
+        <div class="hero__trust-item">
+          <strong><%- include('../partials/icon', { name: 'star', cls: 'inline-icon icon-gold' }) %> <%= site.stats.avgRating %></strong>
+          <span><%= site.stats.reviewCount %>+ Reviews</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__visual" data-aos="fade-left" data-aos-delay="100">
+      <img src="/images/hero/hero-illustration.svg" alt="Healthy home-style thali meal box illustration" width="640" height="560" loading="eager" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRIAL FORM (anchor target for all CTAs) ============ -->
+<section class="trial-section" id="trial">
+  <div class="container trial-section__grid">
+    <div class="trial-section__copy" data-aos="fade-right">
+      <p class="eyebrow">Founding Member Offer</p>
+      <h2>Join <%= site.stats.foundingMembersGoal %> Founding Members &amp; Start with a 7-Day Trial</h2>
+      <p class="lead">Taste it before you commit. Try 7 days of fresh, home-style meals for just &#8377;<%= site.trial.price %>. Cancel or continue, your call.</p>
+      <ul class="check-list">
+        <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> No long-term contracts</li>
+        <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> Delivered to home, office or PG</li>
+        <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> 100% vegetarian, home-style cooking</li>
+      </ul>
+    </div>
+    <div class="trial-section__form glass-card" data-aos="fade-left">
+      <h3>Claim Your Trial Slot</h3>
+      <% if (success) { %>
+        <div class="alert alert--success"><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> Thanks! We'll call you within a few hours to start your trial.</div>
+      <% } %>
+      <% if (error) { %>
+        <div class="alert alert--error"><%- include('../partials/icon', { name: 'alert-circle', cls: 'inline-icon' }) %> <%= error %></div>
+      <% } %>
+      <%- include('../partials/trial-form') %>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="features section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Why Subscribers Love Us</p>
+      <h2>Everything You Need, Nothing You Don't</h2>
+    </div>
+    <div class="grid grid--3">
+      <% features.forEach(function(f, i) { %>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="<%= (i % 3) * 100 %>">
+          <div class="feature-card__icon"><%- include('../partials/icon', { name: f.icon }) %></div>
+          <h3><%= f.title %></h3>
+          <p><%= f.description %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how-it-works section section--tint">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Simple &amp; Fast</p>
+      <h2>How It Works</h2>
+    </div>
+    <div class="steps">
+      <% steps.forEach(function(s, i) { %>
+        <div class="step-card" data-aos="fade-up" data-aos-delay="<%= i * 120 %>">
+          <span class="step-card__number"><%= s.number %></span>
+          <div class="step-card__icon"><%- include('../partials/icon', { name: s.icon }) %></div>
+          <h3><%= s.title %></h3>
+          <p><%= s.description %></p>
+        </div>
+        <% if (i < steps.length - 1) { %><div class="step-connector" aria-hidden="true"></div><% } %>
+      <% }); %>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/how-it-works" class="btn btn--ghost">See full process <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANS PREVIEW ============ -->
+<section class="plans section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Simple, Transparent Pricing</p>
+      <h2>Choose Your Plan</h2>
+    </div>
+    <div class="grid grid--4">
+      <% plans.forEach(function(p, i) { %>
+        <div class="plan-card <%= p.popular ? 'plan-card--popular' : '' %>" data-aos="fade-up" data-aos-delay="<%= (i % 4) * 100 %>">
+          <% if (p.popular) { %><span class="plan-card__badge">Most Popular</span><% } %>
+          <div class="plan-card__icon"><%- include('../partials/icon', { name: p.icon }) %></div>
+          <h3><%= p.name %></h3>
+          <p class="plan-card__tagline"><%= p.tagline %></p>
+          <div class="plan-card__price">
+            <span class="plan-card__amount">&#8377;<%= p.pricing.monthly.toLocaleString('en-IN') %></span>
+            <span class="plan-card__period">/month</span>
+          </div>
+          <p class="plan-card__permeal">&#8377;<%= p.pricing.perMeal %> per meal</p>
+          <a href="/plans#<%= p.id %>" class="btn btn--outline btn--block">View Details</a>
+        </div>
+      <% }); %>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/plans" class="btn btn--ghost">Compare all plans <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US TEASER ============ -->
+<section class="why-us-teaser section section--dark">
+  <div class="container why-us-teaser__grid">
+    <div data-aos="fade-right">
+      <p class="eyebrow eyebrow--light">The Thali &amp; More Difference</p>
+      <h2>Corporate Catering Quality, Delivered to Your Door</h2>
+      <p class="lead lead--light">We've fed IT parks across Sector V for years. Now that same discipline and consistency reaches your daily table.</p>
+      <a href="/why-choose-us" class="btn btn--primary">Why Choose Us <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+    <div class="why-us-teaser__stats" data-aos="fade-left">
+      <div class="stat-card">
+        <span class="stat-card__value" data-counter="<%= site.stats.subscribers %>">0</span>
+        <span class="stat-card__label">Happy Subscribers</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value" data-counter="<%= site.stats.mealsDelivered %>">0</span>
+        <span class="stat-card__label">Meals Delivered</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value" data-counter="4" data-decimal="8">0</span>
+        <span class="stat-card__label">Average Rating</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value" data-counter="4">0</span>
+        <span class="stat-card__label">Localities Served</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS SLIDER ============ -->
+<section class="testimonials section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Social Proof</p>
+      <h2>Loved By Professionals &amp; Families Alike</h2>
+    </div>
+    <div class="testimonial-slider" id="testimonialSlider" data-aos="fade-up">
+      <div class="testimonial-slider__track">
+        <% testimonials.forEach(function(t) { %>
+          <div class="testimonial-card">
+            <div class="testimonial-card__quote"><%- include('../partials/icon', { name: 'quote' }) %></div>
+            <div class="testimonial-card__stars">
+              <% for (let i = 0; i < t.rating; i++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+            </div>
+            <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
+            <div class="testimonial-card__author">
+              <strong><%= t.name %></strong>
+              <span><%= t.role %></span>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <div class="testimonial-slider__controls">
+        <button type="button" class="slider-btn" data-slider-prev aria-label="Previous testimonial"><%- include('../partials/icon', { name: 'arrow-right', cls: 'icon-flip' }) %></button>
+        <div class="slider-dots" id="sliderDots"></div>
+        <button type="button" class="slider-btn" data-slider-next aria-label="Next testimonial"><%- include('../partials/icon', { name: 'arrow-right' }) %></button>
+      </div>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/testimonials" class="btn btn--ghost">Read all reviews <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ PREVIEW ============ -->
+<section class="faq section section--tint">
+  <div class="container container--narrow">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="accordion" data-aos="fade-up">
+      <% faq.forEach(function(item, i) { %>
+        <div class="accordion__item">
+          <button type="button" class="accordion__trigger" aria-expanded="false">
+            <span><%= item.question %></span>
+            <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+          </button>
+          <div class="accordion__panel">
+            <p><%= item.answer %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/faq" class="btn btn--ghost">View all FAQs <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta section">
+  <div class="container final-cta__box glass-card" data-aos="zoom-in">
+    <h2>Ready to Stop Cooking &amp; Start Enjoying?</h2>
+    <p>Join founding members across New Town, Sector V, Salt Lake &amp; Rajarhat today.</p>
+    <div class="hero__ctas">
+      <a href="#trial" class="btn btn--primary btn--lg">Start 7-Day Trial</a>
+      <a href="https://wa.me/<%= site.whatsapp.number %>" class="btn btn--outline btn--lg" target="_blank" rel="noopener">
+        <%- include('../partials/icon', { name: 'whatsapp', cls: 'inline-icon' }) %> Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+<section class="page-hero">
+  <div class="container container--narrow">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'message-circle', cls: 'inline-icon' }) %> Help Center</p>
+    <h1 data-aos="fade-up">Frequently Asked Questions</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">Everything you need to know before subscribing. Can't find your answer? Chat with us on WhatsApp.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow">
+    <div class="accordion" data-aos="fade-up">
+      <% faq.forEach(function(item) { %>
+        <div class="accordion__item">
+          <button type="button" class="accordion__trigger" aria-expanded="false">
+            <span><%= item.question %></span>
+            <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+          </button>
+          <div class="accordion__panel">
+            <p><%= item.answer %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <div class="section__cta" data-aos="fade-up">
+      <p class="lead">Still have questions?</p>
+      <div class="hero__ctas" style="justify-content:center;">
+        <a href="https://wa.me/<%= site.whatsapp.number %>" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+          <%- include('../partials/icon', { name: 'whatsapp', cls: 'inline-icon' }) %> Chat on WhatsApp
+        </a>
+        <a href="/contact" class="btn btn--outline btn--lg">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQPage structured data for rich results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    <% faq.forEach(function(item, i) { %>
+    {
+      "@type": "Question",
+      "name": <%- JSON.stringify(item.question) %>,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": <%- JSON.stringify(item.answer) %>
+      }
+    }<%= i < faq.length - 1 ? ',' : '' %>
+    <% }); %>
+  ]
+}
+</script>

@@ -1,0 +1,54 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'star', cls: 'inline-icon icon-gold' }) %> Social Proof</p>
+    <h1 data-aos="fade-up">Loved By <%= site.stats.subscribers.toLocaleString('en-IN') %>+ Subscribers</h1>
+    <div class="hero__trust" data-aos="fade-up" data-aos-delay="100" style="justify-content:center; margin-top:2rem;">
+      <div class="hero__trust-item">
+        <strong><%- include('../partials/icon', { name: 'star', cls: 'inline-icon icon-gold' }) %> <%= site.stats.avgRating %>/5</strong>
+        <span>Average Rating</span>
+      </div>
+      <div class="hero__trust-divider"></div>
+      <div class="hero__trust-item">
+        <strong><%= site.stats.reviewCount %>+</strong>
+        <span>Verified Reviews</span>
+      </div>
+      <div class="hero__trust-divider"></div>
+      <div class="hero__trust-item">
+        <strong><%= (site.stats.mealsDelivered/1000).toFixed(0) %>K+</strong>
+        <span>Meals Delivered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--3">
+      <% testimonials.forEach(function(t, i) { %>
+        <div class="testimonial-card testimonial-card--static" data-aos="fade-up" data-aos-delay="<%= (i % 3) * 100 %>">
+          <div class="testimonial-card__quote"><%- include('../partials/icon', { name: 'quote' }) %></div>
+          <div class="testimonial-card__stars">
+            <% for (let s = 0; s < t.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+          </div>
+          <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
+          <div class="testimonial-card__author">
+            <strong><%= t.name %></strong>
+            <span><%= t.role %></span>
+          </div>
+          <span class="pill pill--sm"><%= t.plan %></span>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container final-cta__box glass-card" data-aos="zoom-in">
+    <h2>Ready to Become Our Next Success Story?</h2>
+    <p>Start your 7-day trial today and taste why our subscribers stay.</p>
+    <div class="hero__ctas">
+      <a href="/#trial" class="btn btn--primary btn--lg">Start 7-Day Trial</a>
+      <a href="/plans" class="btn btn--outline btn--lg">View Plans</a>
+    </div>
+  </div>
+</section>

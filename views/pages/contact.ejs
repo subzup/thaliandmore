@@ -1,0 +1,78 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'mail', cls: 'inline-icon' }) %> Get In Touch</p>
+    <h1 data-aos="fade-up">We'd Love to Hear From You</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">Questions about plans, delivery areas, or corporate catering? Reach out and our team replies fast.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid grid--2 grid--align-start">
+    <div class="glass-card" data-aos="fade-right" id="refer">
+      <h2>Send Us a Message</h2>
+
+      <% if (success) { %>
+        <div class="alert alert--success">
+          <%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %>
+          Thanks! Your message has been received. We'll get back to you shortly.
+        </div>
+      <% } %>
+      <% if (error) { %>
+        <div class="alert alert--error">
+          <%- include('../partials/icon', { name: 'alert-circle', cls: 'inline-icon' }) %>
+          <%= error %>
+        </div>
+      <% } %>
+
+      <form class="lead-form" id="contactForm" data-endpoint="/api/contact" method="POST" action="/api/contact">
+        <div class="lead-form__row">
+          <input type="text" name="name" placeholder="Full Name" required>
+        </div>
+        <div class="lead-form__row lead-form__row--split">
+          <input type="tel" name="phone" placeholder="Mobile Number" pattern="[6-9][0-9]{9}" maxlength="10" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+        <div class="lead-form__row">
+          <select name="location" required>
+            <option value="" disabled selected>Select Your Locality</option>
+            <% site.locales.forEach(function(loc) { %><option value="<%= loc %>"><%= loc %></option><% }); %>
+          </select>
+        </div>
+        <div class="lead-form__row">
+          <textarea name="message" rows="4" placeholder="How can we help?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block btn--lg">Send Message</button>
+        <p class="lead-form__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="contact-info" data-aos="fade-left">
+      <div class="contact-info__card">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'phone' }) %></div>
+        <h3>Call Us</h3>
+        <a href="tel:<%= site.contact.phoneHref %>"><%= site.contact.phoneDisplay %></a>
+      </div>
+      <div class="contact-info__card">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'whatsapp' }) %></div>
+        <h3>WhatsApp</h3>
+        <a href="https://wa.me/<%= site.whatsapp.number %>" target="_blank" rel="noopener">Chat Instantly</a>
+      </div>
+      <div class="contact-info__card">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'mail' }) %></div>
+        <h3>Email</h3>
+        <a href="mailto:<%= site.contact.email %>"><%= site.contact.email %></a>
+      </div>
+      <div class="contact-info__card">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'map-pin' }) %></div>
+        <h3>Our Kitchen</h3>
+        <p><%= site.kitchen.addressLine %></p>
+      </div>
+
+      <div class="map-placeholder" role="img" aria-label="Map showing delivery areas: New Town, Sector V, Salt Lake and Rajarhat">
+        <%- include('../partials/icon', { name: 'map-pin', cls: 'icon-xl' }) %>
+        <p>New Town &middot; Sector V &middot; Salt Lake &middot; Rajarhat</p>
+        <span class="map-placeholder__note">Interactive map loads here in production (Google Maps embed)</span>
+      </div>
+    </div>
+  </div>
+</section>

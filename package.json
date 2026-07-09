@@ -1,0 +1,37 @@
+{
+  "name": "thali-and-more",
+  "version": "1.0.0",
+  "description": "Thali & More - Healthy home-style meal subscriptions for New Town, Sector V, Salt Lake & Rajarhat",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "meal subscription",
+    "tiffin service",
+    "healthy food delivery",
+    "kolkata",
+    "new town",
+    "sector v"
+  ],
+  "author": "Thali & More",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.4.0",
+    "express-validator": "^7.2.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

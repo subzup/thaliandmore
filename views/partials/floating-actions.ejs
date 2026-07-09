@@ -1,0 +1,16 @@
+<!-- Floating WhatsApp + Call buttons, always accessible -->
+<div class="floating-actions">
+  <a
+    class="floating-btn floating-btn--whatsapp"
+    href="https://wa.me/<%= site.whatsapp.number %>?text=<%= encodeURIComponent(site.whatsapp.defaultMessage) %>"
+    target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+  >
+    <%- include('./icon', { name: 'whatsapp' }) %>
+  </a>
+  <a class="floating-btn floating-btn--call" href="tel:<%= site.contact.phoneHref %>" aria-label="Call us now">
+    <%- include('./icon', { name: 'phone' }) %>
+  </a>
+  <button type="button" class="floating-btn floating-btn--top" id="backToTop" aria-label="Back to top" hidden>
+    <%- include('./icon', { name: 'chevron-up' }) %>
+  </button>
+</div>

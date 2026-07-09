@@ -1,0 +1,63 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'wallet', cls: 'inline-icon' }) %> Plans &amp; Pricing</p>
+    <h1 data-aos="fade-up">Simple Plans. Transparent Pricing.</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">No hidden charges, no surge pricing. Pick the plan that fits your day. Switch or cancel anytime.</p>
+
+    <div class="pricing-toggle" data-aos="fade-up" data-aos-delay="150">
+      <span class="pricing-toggle__label is-active" data-toggle-label="monthly">Monthly</span>
+      <button type="button" class="pricing-toggle__switch" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle between monthly and quarterly billing">
+        <span class="pricing-toggle__knob"></span>
+      </button>
+      <span class="pricing-toggle__label" data-toggle-label="quarterly">Quarterly <span class="badge-save">Save 10%</span></span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--4">
+      <% plans.forEach(function(p, i) { %>
+        <div class="plan-card <%= p.popular ? 'plan-card--popular' : '' %>" id="<%= p.id %>" data-aos="fade-up" data-aos-delay="<%= (i % 4) * 100 %>">
+          <% if (p.popular) { %><span class="plan-card__badge">Most Popular</span><% } %>
+          <div class="plan-card__icon"><%- include('../partials/icon', { name: p.icon }) %></div>
+          <h3><%= p.name %></h3>
+          <p class="plan-card__tagline"><%= p.description %></p>
+
+          <div class="plan-card__price">
+            <span class="plan-card__original">&#8377;<%= p.pricing.monthlyOriginal.toLocaleString('en-IN') %></span>
+            <span class="plan-card__amount" data-monthly="<%= p.pricing.monthly %>" data-quarterly="<%= Math.round(p.pricing.monthly * 3 * 0.9) %>">
+              &#8377;<%= p.pricing.monthly.toLocaleString('en-IN') %>
+            </span>
+            <span class="plan-card__period" data-period-label>/month</span>
+          </div>
+          <p class="plan-card__permeal">&#8377;<%= p.pricing.perMeal %> per meal &middot; <%= p.frequency %></p>
+
+          <ul class="plan-card__features">
+            <% p.features.forEach(function(feat) { %>
+              <li><%- include('../partials/icon', { name: 'check', cls: 'inline-icon icon-sm' }) %> <%= feat %></li>
+            <% }); %>
+          </ul>
+
+          <a href="/#trial" class="btn <%= p.popular ? 'btn--primary' : 'btn--outline' %> btn--block">Start 7-Day Trial</a>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container container--narrow">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Still Deciding?</p>
+      <h2>Not Sure Which Plan Fits You?</h2>
+      <p class="lead">Start with our low-risk 7-day trial for &#8377;<%= site.trial.price %> and experience the quality before subscribing monthly.</p>
+    </div>
+    <div class="hero__ctas" data-aos="fade-up" style="justify-content:center;">
+      <a href="/#trial" class="btn btn--primary btn--lg">Start 7-Day Trial</a>
+      <a href="https://wa.me/<%= site.whatsapp.number %>" class="btn btn--outline btn--lg" target="_blank" rel="noopener">
+        <%- include('../partials/icon', { name: 'whatsapp', cls: 'inline-icon' }) %> Ask on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>

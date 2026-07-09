@@ -1,0 +1,63 @@
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__col footer__brand">
+      <a href="/" class="navbar__brand">
+        <span class="navbar__logo"><%- include('./icon', { name: 'leaf' }) %></span>
+        <span class="navbar__name">Thali &amp; More</span>
+      </a>
+      <p class="footer__tagline">Healthy home-style meal subscriptions, delivered daily from our Mahishbathan kitchen.</p>
+      <div class="footer__socials">
+        <a href="<%= site.socials.instagram %>" aria-label="Instagram" target="_blank" rel="noopener"><%- include('./icon', { name: 'instagram' }) %></a>
+        <a href="<%= site.socials.facebook %>" aria-label="Facebook" target="_blank" rel="noopener"><%- include('./icon', { name: 'facebook' }) %></a>
+        <a href="<%= site.socials.linkedin %>" aria-label="LinkedIn" target="_blank" rel="noopener"><%- include('./icon', { name: 'linkedin' }) %></a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h3 class="footer__heading">Explore</h3>
+      <ul class="footer__links">
+        <li><a href="/plans">Plans &amp; Pricing</a></li>
+        <li><a href="/menu">Weekly Menu</a></li>
+        <li><a href="/how-it-works">How It Works</a></li>
+        <li><a href="/why-choose-us">Why Choose Us</a></li>
+        <li><a href="/testimonials">Testimonials</a></li>
+        <li><a href="/faq">FAQ</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3 class="footer__heading">We Deliver To</h3>
+      <ul class="footer__links">
+        <% site.locales.forEach(function(loc) { %>
+          <li><%= loc %></li>
+        <% }); %>
+      </ul>
+    </div>
+
+    <div class="footer__col footer__newsletter">
+      <h3 class="footer__heading">Get Healthy Eating Tips</h3>
+      <p class="footer__text">Subscribe for menu updates, offers &amp; nutrition tips. No spam.</p>
+      <form class="newsletter-form" id="newsletterForm" data-endpoint="/api/newsletter">
+        <label for="newsletterEmail" class="sr-only">Email address</label>
+        <input type="email" id="newsletterEmail" name="email" placeholder="you@email.com" required>
+        <button type="submit" class="btn btn--primary btn--sm">
+          <%- include('./icon', { name: 'send' }) %>
+        </button>
+      </form>
+      <p class="newsletter-form__status" id="newsletterStatus" role="status" aria-live="polite"></p>
+
+      <div class="footer__contact">
+        <a href="tel:<%= site.contact.phoneHref %>"><%- include('./icon', { name: 'phone' }) %> <%= site.contact.phoneDisplay %></a>
+        <a href="mailto:<%= site.contact.email %>"><%- include('./icon', { name: 'mail' }) %> <%= site.contact.email %></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>&copy; <%= new Date().getFullYear() %> <%= site.name %>. All rights reserved.</p>
+    <div class="footer__legal">
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </div>
+</footer>

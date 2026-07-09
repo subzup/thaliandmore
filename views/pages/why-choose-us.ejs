@@ -1,0 +1,69 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'shield-check', cls: 'inline-icon' }) %> The Thali &amp; More Difference</p>
+    <h1 data-aos="fade-up">Why Working Professionals &amp; Families Choose Us</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">We're not another food delivery app. We're a subscription kitchen built on corporate-grade consistency.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--3">
+      <% whyUs.forEach(function(w, i) { %>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="<%= (i % 3) * 100 %>">
+          <div class="feature-card__icon"><%- include('../partials/icon', { name: w.icon }) %></div>
+          <h3><%= w.title %></h3>
+          <p><%= w.description %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container why-us-teaser__grid">
+    <div data-aos="fade-right">
+      <p class="eyebrow eyebrow--light">Vs. Food Delivery Apps</p>
+      <h2>Why Subscribing Beats Ordering Daily</h2>
+      <p class="lead lead--light">Swiggy and Zomato are great for occasional cravings. For daily meals, they cost more, vary in quality, and add zero routine to your day.</p>
+    </div>
+    <div class="compare-table" data-aos="fade-left">
+      <div class="compare-table__row compare-table__row--head">
+        <span></span>
+        <span>Thali &amp; More</span>
+        <span>Food Apps</span>
+      </div>
+      <div class="compare-table__row">
+        <span>Daily Cost</span>
+        <span class="is-good"><%- include('../partials/icon', { name: 'check', cls: 'inline-icon' }) %> ~&#8377;108-137/meal</span>
+        <span class="is-bad"><%- include('../partials/icon', { name: 'x', cls: 'inline-icon' }) %> &#8377;180+ with fees</span>
+      </div>
+      <div class="compare-table__row">
+        <span>Consistency</span>
+        <span class="is-good"><%- include('../partials/icon', { name: 'check', cls: 'inline-icon' }) %> Same trusted kitchen</span>
+        <span class="is-bad"><%- include('../partials/icon', { name: 'x', cls: 'inline-icon' }) %> Different vendor daily</span>
+      </div>
+      <div class="compare-table__row">
+        <span>Daily Ordering</span>
+        <span class="is-good"><%- include('../partials/icon', { name: 'check', cls: 'inline-icon' }) %> Zero effort, auto-delivered</span>
+        <span class="is-bad"><%- include('../partials/icon', { name: 'x', cls: 'inline-icon' }) %> Order every single time</span>
+      </div>
+      <div class="compare-table__row">
+        <span>Home-Style Food</span>
+        <span class="is-good"><%- include('../partials/icon', { name: 'check', cls: 'inline-icon' }) %> Balanced thali, low oil</span>
+        <span class="is-bad"><%- include('../partials/icon', { name: 'x', cls: 'inline-icon' }) %> Restaurant-style, heavy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container final-cta__box glass-card" data-aos="zoom-in">
+    <h2>Experience the Difference Yourself</h2>
+    <p>7 days. Real home-style meals. See why we're different.</p>
+    <div class="hero__ctas">
+      <a href="/#trial" class="btn btn--primary btn--lg">Start 7-Day Trial</a>
+      <a href="/testimonials" class="btn btn--outline btn--lg">Read Reviews</a>
+    </div>
+  </div>
+</section>

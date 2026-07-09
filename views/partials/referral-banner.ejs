@@ -1,0 +1,13 @@
+<!-- Slim top announcement bar: referral program, dismissible -->
+<div class="topbar" id="referral-banner">
+  <div class="container topbar__inner">
+    <p class="topbar__text">
+      <%- include('./icon', { name: 'gift', cls: 'topbar__icon' }) %>
+      <span><strong>Refer a friend</strong> &amp; both of you get 1 week free on any plan.</span>
+      <a href="/contact#refer" class="topbar__link">Refer Now</a>
+    </p>
+    <button type="button" class="topbar__close" aria-label="Dismiss banner" onclick="document.getElementById('referral-banner').style.display='none'">
+      <%- include('./icon', { name: 'x' }) %>
+    </button>
+  </div>
+</div>

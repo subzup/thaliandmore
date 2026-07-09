@@ -1,0 +1,73 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'list-checks', cls: 'inline-icon' }) %> Simple &amp; Fast</p>
+    <h1 data-aos="fade-up">How Thali &amp; More Works</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">From sign-up to your first delivery in three simple steps. No paperwork, no store visits, no daily ordering.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="steps steps--vertical">
+      <% steps.forEach(function(s, i) { %>
+        <div class="step-card step-card--detailed" data-aos="fade-up" data-aos-delay="<%= i * 120 %>">
+          <span class="step-card__number"><%= s.number %></span>
+          <div class="step-card__icon"><%- include('../partials/icon', { name: s.icon }) %></div>
+          <div>
+            <h3><%= s.title %></h3>
+            <p><%= s.description %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Once You're Subscribed</p>
+      <h2>What Happens Every Day</h2>
+    </div>
+    <div class="grid grid--3">
+      <div class="feature-card" data-aos="fade-up">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'clock' }) %></div>
+        <h3>Morning Prep</h3>
+        <p>Our Mahishbathan kitchen begins cooking fresh at dawn using the day's seasonal produce. Nothing is pre-cooked or frozen.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'truck' }) %></div>
+        <h3>Route Dispatch</h3>
+        <p>Dedicated delivery routes across New Town, Sector V, Salt Lake &amp; Rajarhat ensure your meal reaches you in its delivery window.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'message-circle' }) %></div>
+        <h3>You're In Control</h3>
+        <p>Pause, skip, or change your plan anytime via WhatsApp or your account, and changes apply from the very next delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Choose Your Plan</p>
+      <h2>Pick What Fits Your Day</h2>
+    </div>
+    <div class="grid grid--4">
+      <% plans.forEach(function(p, i) { %>
+        <div class="plan-card <%= p.popular ? 'plan-card--popular' : '' %>" data-aos="fade-up" data-aos-delay="<%= (i % 4) * 100 %>">
+          <% if (p.popular) { %><span class="plan-card__badge">Most Popular</span><% } %>
+          <div class="plan-card__icon"><%- include('../partials/icon', { name: p.icon }) %></div>
+          <h3><%= p.name %></h3>
+          <p class="plan-card__price"><span class="plan-card__amount">&#8377;<%= p.pricing.monthly.toLocaleString('en-IN') %></span><span class="plan-card__period">/month</span></p>
+          <a href="/plans#<%= p.id %>" class="btn btn--outline btn--block">View Details</a>
+        </div>
+      <% }); %>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/#trial" class="btn btn--primary btn--lg">Start 7-Day Trial</a>
+    </div>
+  </div>
+</section>

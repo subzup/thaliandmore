@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('./head') %>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <%- include('./referral-banner') %>
+  <%- include('./navbar') %>
+
+  <main id="main-content">
+    <%- body %>
+  </main>
+
+  <%- include('./footer') %>
+  <%- include('./floating-actions') %>
+  <%- include('./sticky-cta') %>
+  <%- include('./exit-intent') %>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

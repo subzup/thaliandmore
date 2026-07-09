@@ -1,0 +1,24 @@
+<!-- Primary lead-gen form: reused in Hero + can be dropped into any page via include -->
+<form class="lead-form lead-form--card" id="trialForm" data-endpoint="/api/trial">
+  <div class="lead-form__row">
+    <input type="text" name="name" placeholder="Your Name" required>
+  </div>
+  <div class="lead-form__row">
+    <input type="tel" name="phone" placeholder="Mobile Number" pattern="[6-9][0-9]{9}" maxlength="10" required>
+  </div>
+  <div class="lead-form__row">
+    <select name="locality" required>
+      <option value="" disabled selected>Select Your Area</option>
+      <% site.locales.forEach(function(loc) { %><option value="<%= loc %>"><%= loc %></option><% }); %>
+    </select>
+  </div>
+  <input type="hidden" name="plan" value="7-Day Trial">
+  <button type="submit" class="btn btn--primary btn--block btn--lg">
+    Start 7-Day Trial for &#8377;<%= site.trial.price %>
+  </button>
+  <p class="lead-form__status" role="status" aria-live="polite"></p>
+  <p class="lead-form__fineprint">
+    <%- include('./icon', { name: 'check-circle', cls: 'inline-icon' }) %> No long-term contract &nbsp;
+    <%- include('./icon', { name: 'check-circle', cls: 'inline-icon' }) %> Cancel anytime
+  </p>
+</form>

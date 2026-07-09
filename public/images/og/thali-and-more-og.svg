@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F3D28"/>
+      <stop offset="100%" stop-color="#1C8C5A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="220" fill="#2F855A" opacity="0.35"/>
+  <circle cx="90" cy="560" r="180" fill="#14663F" opacity="0.4"/>
+
+  <circle cx="140" cy="150" r="42" fill="#F8FAFC"/>
+  <path d="M150 178c-15 0-27-12-27-25 0-15 12-32 27-37 3 10 10 15 10 24 0 13-6 25-10 38Z" fill="#1C8C5A"/>
+
+  <text x="120" y="300" font-family="Sora, sans-serif" font-size="64" font-weight="800" fill="#FFFFFF">Thali &amp; More</text>
+  <text x="120" y="360" font-family="Inter, sans-serif" font-size="30" fill="#D7F5E4">Healthy Home-Style Meals, Delivered Daily.</text>
+  <text x="120" y="410" font-family="Inter, sans-serif" font-size="22" fill="#A8E6C4">New Town · Sector V · Salt Lake · Rajarhat</text>
+
+  <g transform="translate(120,460)">
+    <rect width="230" height="56" rx="28" fill="#FFFFFF"/>
+    <text x="30" y="36" font-family="Sora, sans-serif" font-size="20" font-weight="700" fill="#14663F">Start 7-Day Trial</text>
+  </g>
+</svg>

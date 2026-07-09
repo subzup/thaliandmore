@@ -1,0 +1,48 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'calendar-days', cls: 'inline-icon' }) %> Weekly Rotation</p>
+    <h1 data-aos="fade-up">This Week's Menu</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100"><%= menu.note %></p>
+
+    <div class="menu-highlights" data-aos="fade-up" data-aos-delay="150">
+      <% menu.highlights.forEach(function(h) { %>
+        <span class="pill"><%- include('../partials/icon', { name: h.icon, cls: 'inline-icon' }) %> <%= h.label %></span>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="menu-table" data-aos="fade-up">
+      <% menu.week.forEach(function(day) { %>
+        <div class="menu-day">
+          <h3 class="menu-day__title"><%= day.day %></h3>
+          <div class="menu-day__meals">
+            <div class="menu-meal">
+              <p class="menu-meal__label"><%- include('../partials/icon', { name: 'sun', cls: 'inline-icon' }) %> Lunch</p>
+              <p class="menu-meal__main"><%= day.lunch.main %></p>
+              <p class="menu-meal__sides"><%= day.lunch.sides.join(' · ') %></p>
+            </div>
+            <div class="menu-meal">
+              <p class="menu-meal__label"><%- include('../partials/icon', { name: 'clock', cls: 'inline-icon' }) %> Dinner</p>
+              <p class="menu-meal__main"><%= day.dinner.main %></p>
+              <p class="menu-meal__sides"><%= day.dinner.sides.join(' · ') %></p>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container final-cta__box glass-card" data-aos="zoom-in">
+    <h2>Craving This Menu Already?</h2>
+    <p>Start your 7-day trial and taste this week's rotation for yourself.</p>
+    <div class="hero__ctas">
+      <a href="/#trial" class="btn btn--primary btn--lg">Start 7-Day Trial</a>
+      <a href="/plans" class="btn btn--outline btn--lg">View Plans</a>
+    </div>
+  </div>
+</section>
