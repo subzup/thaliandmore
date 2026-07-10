@@ -1,6 +1,6 @@
 // Handles lead-generation form submissions: trial signup, contact form, newsletter.
 // Leads are emailed via Resend (primary delivery) and also appended to
-// storage/leads.json as a local backup — though that file won't persist on
+// storage/leads.json as a local backup, though that file won't persist on
 // serverless platforms like Vercel, whose filesystem is read-only outside /tmp.
 const fs = require('fs');
 const path = require('path');
@@ -11,10 +11,15 @@ const site = require('../config/site');
 const LEADS_FILE = path.join(__dirname, '..', 'storage', 'leads.json');
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 const NOTIFY_EMAIL = process.env.LEAD_NOTIFICATION_EMAIL || site.contact.email;
-// Resend's shared sandbox sender — works without verifying a domain. Once
+// Resend's shared sandbox sender: works without verifying a domain. Once
 // thaliandmore.in is verified in the Resend dashboard, switch this to
 // something like `Thali & More <leads@thaliandmore.in>`.
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Thali & More Leads <onboarding@resend.dev>';
+
+// One-time diagnostic at process start so `vercel logs` can confirm which
+// env vars actually reached this deployment, since misconfigured/stale env
+// vars fail silently otherwise (the code just falls back to defaults).
+console.log('[LEAD] config: RESEND_API_KEY=%s, NOTIFY_EMAIL=%s, FROM_EMAIL=%s', resend ? 'set' : 'MISSING', NOTIFY_EMAIL, FROM_EMAIL);
 
 const LEAD_LABELS = {
   trial: '7-Day Trial Signup',
