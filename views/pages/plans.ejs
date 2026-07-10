@@ -25,7 +25,7 @@
           <p class="plan-card__tagline"><%= p.description %></p>
 
           <div class="plan-card__price">
-            <span class="plan-card__original">&#8377;<%= p.pricing.monthlyOriginal.toLocaleString('en-IN') %></span>
+            <span class="plan-card__original" data-monthly="<%= p.pricing.monthlyOriginal %>" data-quarterly="<%= p.pricing.monthly * 3 %>">&#8377;<%= p.pricing.monthlyOriginal.toLocaleString('en-IN') %></span>
             <span class="plan-card__amount" data-monthly="<%= p.pricing.monthly %>" data-quarterly="<%= Math.round(p.pricing.monthly * 3 * 0.9) %>">
               &#8377;<%= p.pricing.monthly.toLocaleString('en-IN') %>
             </span>

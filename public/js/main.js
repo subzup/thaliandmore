@@ -176,7 +176,7 @@
         var match = (label.dataset.toggleLabel === 'quarterly') === isQuarterly;
         label.classList.toggle('is-active', match);
       });
-      document.querySelectorAll('.plan-card__amount').forEach(function (amountEl) {
+      document.querySelectorAll('.plan-card__amount, .plan-card__original').forEach(function (amountEl) {
         var value = isQuarterly ? amountEl.dataset.quarterly : amountEl.dataset.monthly;
         amountEl.textContent = '₹' + Number(value).toLocaleString('en-IN');
       });
