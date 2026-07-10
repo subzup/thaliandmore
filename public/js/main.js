@@ -112,7 +112,7 @@
       if (!start) start = timestamp;
       var progress = Math.min((timestamp - start) / duration, 1);
       var eased = 1 - Math.pow(1 - progress, 3);
-      var value = decimals ? (target + eased * 0.8).toFixed(decimals) : Math.floor(eased * target);
+      var value = decimals ? (eased * target).toFixed(decimals) : Math.floor(eased * target);
       el.textContent = Number(value).toLocaleString('en-IN');
       if (progress < 1) requestAnimationFrame(step);
       else el.textContent = decimals ? target.toFixed(decimals) : target.toLocaleString('en-IN');
