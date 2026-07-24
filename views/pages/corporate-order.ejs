@@ -77,12 +77,12 @@
       <div class="lead-form__row">
         <input type="text" name="name" placeholder="Full Name *" required maxlength="100">
       </div>
-      <div class="lead-form__row lead-form__row--split">
+      <div class="lead-form__row">
         <input type="tel" name="phone" placeholder="Mobile Number *" pattern="[6-9][0-9]{9}" maxlength="10" required>
-        <input type="email" name="email" placeholder="Email Address *" required>
       </div>
       <div class="lead-form__row">
-        <input type="text" name="company" placeholder="Company *" required maxlength="150">
+        <label class="lead-form__label" for="requiredTime">Food Required By *</label>
+        <input type="time" id="requiredTime" name="requiredTime" required>
       </div>
       <div class="lead-form__row">
         <textarea name="specialInstructions" rows="2" placeholder="Special Instructions (Optional)" maxlength="1000"></textarea>

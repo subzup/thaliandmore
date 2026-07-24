@@ -24,8 +24,10 @@ router.post(
       .trim()
       .matches(/^[6-9]\d{9}$/)
       .withMessage('Enter a valid 10-digit Indian mobile number'),
-    body('email').trim().isEmail().withMessage('Enter a valid email address').normalizeEmail(),
-    body('company').trim().notEmpty().withMessage('Company name is required').isLength({ max: 150 }),
+    body('requiredTime')
+      .trim()
+      .matches(/^([01]\d|2[0-3]):([0-5]\d)$/)
+      .withMessage('Please select what time you need the food'),
     body('cafeteriaId').notEmpty().withMessage('Please select a cafeteria').isInt(),
     body('items').isArray({ min: 1 }).withMessage('Please add at least one item to your order'),
     body('specialInstructions').optional({ checkFalsy: true }).trim().isLength({ max: 1000 }),

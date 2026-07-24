@@ -10,6 +10,7 @@
           <th>Booking</th>
           <th>Customer</th>
           <th>Cafeteria</th>
+          <th>Required By</th>
           <th>Items</th>
           <th>Total</th>
           <th>Status</th>
@@ -22,9 +23,10 @@
             <td><strong><%= b.booking_code %></strong></td>
             <td>
               <%= b.customer_name %><br>
-              <span style="color:var(--color-ink-muted); font-size:0.8rem;"><%= b.phone %> &middot; <%= b.email %><br><%= b.company %></span>
+              <span style="color:var(--color-ink-muted); font-size:0.8rem;"><%= b.phone %></span>
             </td>
             <td><%= b.cafeteria_name %></td>
+            <td><%= b.required_time %></td>
             <td>
               <% (typeof b.items === 'string' ? JSON.parse(b.items) : b.items).forEach(function(item) { %>
                 <div><%= item.name %> (<%= item.variant %>) &times;<%= item.quantity %></div>
@@ -47,7 +49,7 @@
           </tr>
         <% }); %>
         <% if (!bookings.length) { %>
-          <tr><td colspan="7" style="text-align:center; color:var(--color-ink-muted);">No bookings yet.</td></tr>
+          <tr><td colspan="8" style="text-align:center; color:var(--color-ink-muted);">No bookings yet.</td></tr>
         <% } %>
       </tbody>
     </table>

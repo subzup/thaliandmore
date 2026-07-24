@@ -1,7 +1,8 @@
-// Customer confirmation + admin notification emails for corporate meal
-// bookings, sent via the shared Resend client (config/email.js).
+// Admin notification email for corporate meal bookings, sent via the shared
+// Resend client (config/email.js). There's no customer email on file (the
+// booking form only collects name/phone), so confirmation happens by phone,
+// not email.
 const email = require('../config/email');
-const site = require('../config/site');
 
 function formatRupees(n) {
   return `₹${Number(n).toLocaleString('en-IN')}`;
@@ -17,23 +18,6 @@ function itemsTable(items) {
   return `<table style="width:100%;border-collapse:collapse;">${rows}</table>`;
 }
 
-async function sendCustomerEmail(booking) {
-  const items = typeof booking.items === 'string' ? JSON.parse(booking.items) : booking.items;
-  await email.send({
-    to: booking.email,
-    subject: `Booking Received: ${booking.booking_code}`,
-    html: `
-      <h2>Thanks, your booking is in!</h2>
-      <p><strong>Booking ID:</strong> ${booking.booking_code}</p>
-      <p><strong>Cafeteria:</strong> ${booking.cafeteria_name}</p>
-      ${itemsTable(items)}
-      <p style="margin-top:12px;"><strong>Estimated Total: ${formatRupees(booking.estimated_total)}</strong></p>
-      <p>Our team will confirm your order shortly. No online payment is required.</p>
-      <p>Questions? Reach us at ${site.contact.phoneDisplay} or ${site.contact.email}.</p>
-    `,
-  });
-}
-
 async function sendAdminEmail(booking) {
   const items = typeof booking.items === 'string' ? JSON.parse(booking.items) : booking.items;
   await email.send({
@@ -42,9 +26,10 @@ async function sendAdminEmail(booking) {
     html: `
       <h2>New Corporate Meal Booking</h2>
       <p><strong>Booking ID:</strong> ${booking.booking_code}</p>
-      <p><strong>Customer:</strong> ${booking.customer_name} (${booking.company})</p>
-      <p><strong>Phone:</strong> ${booking.phone} &middot; <strong>Email:</strong> ${booking.email}</p>
+      <p><strong>Customer:</strong> ${booking.customer_name}</p>
+      <p><strong>Phone:</strong> ${booking.phone}</p>
       <p><strong>Cafeteria:</strong> ${booking.cafeteria_name}</p>
+      <p><strong>Required By:</strong> ${booking.required_time}</p>
       ${itemsTable(items)}
       <p style="margin-top:12px;"><strong>Estimated Total: ${formatRupees(booking.estimated_total)}</strong></p>
       ${booking.special_instructions ? `<p><strong>Special Instructions:</strong> ${booking.special_instructions}</p>` : ''}
@@ -54,5 +39,5 @@ async function sendAdminEmail(booking) {
 }
 
 exports.sendBookingEmails = async (booking) => {
-  await Promise.all([sendCustomerEmail(booking), sendAdminEmail(booking)]);
+  await sendAdminEmail(booking);
 };

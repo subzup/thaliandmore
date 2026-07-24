@@ -127,8 +127,7 @@
       items: items,
       name: formData.get('name'),
       phone: formData.get('phone'),
-      email: formData.get('email'),
-      company: formData.get('company'),
+      requiredTime: formData.get('requiredTime'),
       specialInstructions: formData.get('specialInstructions'),
       idempotencyKey: idempotencyKey,
     };

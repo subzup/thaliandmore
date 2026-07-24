@@ -41,7 +41,7 @@ exports.submitOrder = async (req, res) => {
     return res.status(422).json({ success: false, errors: errors.array() });
   }
 
-  const { cafeteriaId, items, name, phone, email, company, specialInstructions, idempotencyKey } = req.body;
+  const { cafeteriaId, items, name, phone, requiredTime, specialInstructions, idempotencyKey } = req.body;
 
   // A resubmission (double-tap, network retry) with the same idempotency key
   // returns the original booking instead of creating a second one.
@@ -94,8 +94,7 @@ exports.submitOrder = async (req, res) => {
     cafeteriaName: cafeteria.name,
     customerName: name,
     phone,
-    email,
-    company,
+    requiredTime,
     specialInstructions,
     items: lineItems,
     estimatedTotal,

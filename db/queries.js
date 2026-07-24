@@ -103,13 +103,13 @@ exports.findBookingByIdempotencyKey = async (key) => {
 exports.createBooking = async (booking) => {
   const { rows } = await query(
     `INSERT INTO bookings
-       (booking_code, cafeteria_id, cafeteria_name, customer_name, phone, email, company,
+       (booking_code, cafeteria_id, cafeteria_name, customer_name, phone, required_time,
         special_instructions, items, estimated_total, idempotency_key)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
      RETURNING *`,
     [
       booking.bookingCode, booking.cafeteriaId, booking.cafeteriaName, booking.customerName,
-      booking.phone, booking.email, booking.company, booking.specialInstructions || null,
+      booking.phone, booking.requiredTime, booking.specialInstructions || null,
       JSON.stringify(booking.items), booking.estimatedTotal, booking.idempotencyKey || null,
     ]
   );

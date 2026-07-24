@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS bookings (
   cafeteria_name VARCHAR(150) NOT NULL,
   customer_name VARCHAR(150) NOT NULL,
   phone VARCHAR(15) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  company VARCHAR(150) NOT NULL,
+  required_time VARCHAR(10) NOT NULL,
   special_instructions TEXT,
   items JSONB NOT NULL,
   estimated_total INTEGER NOT NULL,
@@ -49,6 +48,12 @@ CREATE TABLE IF NOT EXISTS bookings (
   idempotency_key VARCHAR(100) UNIQUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Superseded by a simpler flow: no customer email/company, replaced with the
+-- time the food is required by. Safe no-ops on a fresh database.
+ALTER TABLE bookings DROP COLUMN IF EXISTS email;
+ALTER TABLE bookings DROP COLUMN IF EXISTS company;
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS required_time VARCHAR(10) NOT NULL DEFAULT '';
 
 CREATE INDEX IF NOT EXISTS idx_bookings_created_at ON bookings (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_menu_items_category ON menu_items (category, sort_order);
