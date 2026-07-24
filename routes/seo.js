@@ -13,7 +13,7 @@ router.get('/sitemap.xml', (req, res) => {
 
   const locationUrls = [
     { path: '/locations', priority: '0.7' },
-    ...data.locations.map((loc) => ({ path: `/locations/${loc.slug}`, priority: '0.8' })),
+    ...data.locations.map((loc) => ({ path: `/locations/${loc.slug}`, priority: '0.9' })),
   ];
 
   const planUrls = data.plans.map((p) => ({ path: `/plans/${p.id}`, priority: '0.8' }));

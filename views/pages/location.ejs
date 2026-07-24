@@ -18,7 +18,32 @@
     "addressRegion": "<%= site.kitchen.addressRegion %>",
     "postalCode": "<%= site.kitchen.postalCode %>",
     "addressCountry": "<%= site.kitchen.country %>"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": <%= location.geo.lat %>,
+    "longitude": <%= location.geo.lng %>
   }
+}
+</script>
+
+<!-- FAQPage structured data for the locally-relevant FAQ accordion below -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    <% location.localFaq.forEach(function(item, i) { %>
+    {
+      "@type": "Question",
+      "name": <%- JSON.stringify(item.question) %>,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": <%- JSON.stringify(item.answer) %>
+      }
+    }<%= i < location.localFaq.length - 1 ? ',' : '' %>
+    <% }); %>
+  ]
 }
 </script>
 

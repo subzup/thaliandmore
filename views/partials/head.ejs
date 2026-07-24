@@ -32,7 +32,9 @@
 <!-- Styles -->
 <link rel="stylesheet" href="/css/style.css">
 
-<!-- Schema.org: LocalBusiness / FoodEstablishment -->
+<!-- Schema.org: LocalBusiness / FoodEstablishment (skipped on location pages,
+     which render their own more specific version instead of duplicating it) -->
+<% if (typeof hideDefaultSchema === 'undefined' || !hideDefaultSchema) { %>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,3 +60,4 @@
   }
 }
 </script>
+<% } %>
