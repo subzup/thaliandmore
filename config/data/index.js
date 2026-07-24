@@ -9,4 +9,7 @@ module.exports = {
   faq: require('./faq'),
   locations: require('./locations'),
   blog: require('./blog'),
+  cafeterias: require('./cafeterias'),
+  corporateThalis: require('./corporate-thalis'),
+  corporateCateringOptions: require('./corporate-catering-options'),
 };

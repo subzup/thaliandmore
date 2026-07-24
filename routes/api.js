@@ -43,6 +43,39 @@ router.post(
 );
 
 router.post(
+  '/corporate-catering',
+  formLimiter,
+  [
+    body('name').trim().notEmpty().withMessage('Name is required').isLength({ max: 100 }),
+    body('phone')
+      .trim()
+      .matches(/^[6-9]\d{9}$/)
+      .withMessage('Enter a valid 10-digit Indian mobile number'),
+    body('email').trim().isEmail().withMessage('Enter a valid email address').normalizeEmail(),
+    body('requirementType').trim().notEmpty().withMessage('Please select the type of requirement'),
+    body('eventDate').trim().notEmpty().withMessage('Please select an event date'),
+    body('deliveryTime').trim().notEmpty().withMessage('Please select a preferred delivery time'),
+    body('recurring').trim().notEmpty().withMessage('Please select a recurrence option'),
+    body('numberOfMeals').trim().isInt({ min: 1 }).withMessage('Enter a valid number of meals'),
+    body('mealPreference').trim().notEmpty().withMessage('Please select a meal preference'),
+    body('thali').trim().notEmpty().withMessage('Please select a thali'),
+    body('cafeteria').trim().notEmpty().withMessage('Please select a delivery cafeteria'),
+    body('companyName')
+      .if(body('cafeteria').equals('Other Location'))
+      .trim()
+      .notEmpty()
+      .withMessage('Company name is required for other locations'),
+    body('officeAddress')
+      .if(body('cafeteria').equals('Other Location'))
+      .trim()
+      .notEmpty()
+      .withMessage('Office address is required for other locations'),
+    body('specialInstructions').optional({ checkFalsy: true }).trim().isLength({ max: 1000 }),
+  ],
+  leadController.corporateCateringSubmit
+);
+
+router.post(
   '/newsletter',
   formLimiter,
   [body('email').trim().isEmail().withMessage('Enter a valid email address').normalizeEmail()],

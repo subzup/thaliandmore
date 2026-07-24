@@ -292,9 +292,25 @@
     });
   }
 
-  ['trialForm', 'exitIntentForm', 'contactForm'].forEach(function (id) {
+  ['trialForm', 'exitIntentForm', 'contactForm', 'corporateCateringForm'].forEach(function (id) {
     wireLeadForm(document.getElementById(id));
   });
+
+  /* ---------- Corporate catering: "Other Location" conditional fields ---------- */
+  var cafeteriaSelect = document.getElementById('cc-cafeteria');
+  var otherLocationFields = document.getElementById('otherLocationFields');
+  if (cafeteriaSelect && otherLocationFields) {
+    var companyInput = document.getElementById('cc-company');
+    var addressInput = document.getElementById('cc-address');
+    function toggleOtherLocation() {
+      var isOther = cafeteriaSelect.value === 'Other Location';
+      otherLocationFields.hidden = !isOther;
+      if (companyInput) companyInput.required = isOther;
+      if (addressInput) addressInput.required = isOther;
+    }
+    cafeteriaSelect.addEventListener('change', toggleOtherLocation);
+    toggleOtherLocation();
+  }
 
   var newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {

@@ -337,6 +337,27 @@ p { color: var(--color-ink-soft); }
 .lead-form__fineprint { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.78rem; color: var(--color-ink-muted); align-items: center; }
 .lead-form__fineprint .icon { color: var(--color-primary); }
 
+.lead-form__label { font-size: 0.85rem; font-weight: 600; color: var(--color-ink); margin-bottom: 0.4rem; display: block; }
+.lead-form__section-title { font-family: var(--font-heading); font-size: 1.1rem; margin: 0.5rem 0 0.25rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); }
+.lead-form__section-title:first-child { padding-top: 0; border-top: none; margin-top: 0; }
+
+.option-group { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.option-pill { position: relative; }
+.option-pill input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.option-pill span {
+  display: inline-flex; align-items: center; padding: 0.55rem 1.1rem; border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border); font-size: 0.85rem; font-weight: 500; color: var(--color-ink-soft);
+  cursor: pointer; transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.option-pill input:checked + span { border-color: var(--color-primary); background: var(--color-primary-tint); color: var(--color-primary-dark); font-weight: 600; }
+.option-pill input:focus-visible + span { box-shadow: 0 0 0 4px var(--color-primary-tint); }
+
+.conditional-fields {
+  display: flex; flex-direction: column; gap: 0.9rem; padding: 1rem; margin-top: 0.5rem;
+  background: var(--color-bg); border-radius: var(--radius-sm); border: 1px dashed var(--color-border);
+}
+.conditional-fields[hidden] { display: none; }
+
 .newsletter-form { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
 .newsletter-form input { flex: 1; padding: 0.7rem 1rem; border-radius: var(--radius-sm); border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; }
 .newsletter-form input::placeholder { color: #A0AEC0; }

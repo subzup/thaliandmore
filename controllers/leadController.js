@@ -25,11 +25,12 @@ const LEAD_LABELS = {
   trial: '7-Day Trial Signup',
   contact: 'Contact Form Message',
   newsletter: 'Newsletter Signup',
+  'corporate-catering': 'Corporate Catering Enquiry',
 };
 
 async function sendLeadEmail(record) {
   if (!resend) {
-    console.warn('[LEAD] RESEND_API_KEY not set — skipping email notification');
+    console.warn('[LEAD] RESEND_API_KEY not set, skipping email notification');
     return;
   }
   const rows = Object.entries(record)
@@ -39,11 +40,11 @@ async function sendLeadEmail(record) {
 
   try {
     // The Resend SDK resolves (rather than rejects) on API-level failures,
-    // returning { error } instead of throwing — both cases must be checked.
+    // returning { error } instead of throwing, both cases must be checked.
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: NOTIFY_EMAIL,
-      subject: `New ${LEAD_LABELS[record.type] || 'Lead'} — Thali & More`,
+      subject: `New ${LEAD_LABELS[record.type] || 'Lead'} | Thali & More`,
       html: `<h2>${LEAD_LABELS[record.type] || 'New Lead'}</h2><table>${rows}</table>`,
     });
     if (error) {
@@ -121,6 +122,43 @@ exports.contactSubmit = async (req, res) => {
     return res.json({ success: true, message: "Message received! Our team will reach out shortly." });
   }
   return res.redirect('/contact?success=1');
+};
+
+// POST /api/corporate-catering: corporate catering & event booking form
+exports.corporateCateringSubmit = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    if (wantsJson(req)) {
+      return res.status(422).json({ success: false, errors: errors.array() });
+    }
+    return res.redirect(`/corporate-catering?error=${encodeURIComponent('Please fill all required fields correctly.')}`);
+  }
+
+  const {
+    name, phone, email,
+    requirementType, eventDate, deliveryTime, recurring,
+    numberOfMeals, mealPreference, thali, cafeteria,
+    companyName, officeAddress, landmark,
+    additionalItems, specialInstructions, referralSource,
+  } = req.body;
+
+  await appendLead({
+    type: 'corporate-catering',
+    name, phone, email,
+    requirementType, eventDate, deliveryTime, recurring,
+    numberOfMeals, mealPreference, thali, cafeteria,
+    ...(companyName ? { companyName } : {}),
+    ...(officeAddress ? { officeAddress } : {}),
+    ...(landmark ? { landmark } : {}),
+    additionalItems: additionalItems ? [].concat(additionalItems).join(', ') : 'None',
+    specialInstructions: specialInstructions || 'None',
+    referralSource: referralSource || 'Not specified',
+  });
+
+  if (wantsJson(req)) {
+    return res.json({ success: true, message: "Thanks! Our corporate catering team will reach out shortly to confirm your booking." });
+  }
+  return res.redirect('/corporate-catering?success=1');
 };
 
 // POST /api/newsletter: footer / referral banner newsletter capture
