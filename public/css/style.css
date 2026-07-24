@@ -550,7 +550,7 @@ p { color: var(--color-ink-soft); }
 #pageLoader { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: var(--color-primary); z-index: 999; transition: width 400ms ease, opacity 300ms ease; }
 
 /* ---------- 24. Corporate order app ---------- */
-.order-app { max-width: 640px; margin: 0 auto; padding: 1.5rem 1.25rem calc(7rem + env(safe-area-inset-bottom)); }
+.order-app { max-width: 640px; margin: 0 auto; padding: 1.5rem 1.25rem calc(var(--order-summary-h, 0px) + 1.5rem + env(safe-area-inset-bottom)); }
 .order-steps { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.75rem; }
 .order-step { font-size: 0.78rem; font-weight: 600; color: var(--color-ink-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); background: var(--color-bg); }
 .order-step.is-active { background: var(--color-primary); color: #fff; }

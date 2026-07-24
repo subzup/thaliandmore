@@ -22,6 +22,18 @@
   }
 
   /* ---------- Step navigation ---------- */
+  var summaryEl = document.getElementById('orderSummary');
+
+  // The sticky summary bar's height grows with the number of cart lines (up
+  // to its own max-height/scroll cap), so the page's reserved bottom padding
+  // has to track it, otherwise the bar ends up covering the Continue/Back
+  // buttons once the cart has more than a couple of items.
+  function syncSummaryPadding() {
+    var h = summaryEl.hidden ? 0 : summaryEl.offsetHeight;
+    document.documentElement.style.setProperty('--order-summary-h', h + 'px');
+  }
+  window.addEventListener('resize', syncSummaryPadding);
+
   function goToStep(step) {
     document.querySelectorAll('.order-panel[data-panel]').forEach(function (panel) {
       panel.hidden = panel.dataset.panel !== String(step);
@@ -31,8 +43,8 @@
       el.classList.toggle('is-active', n === step);
       el.classList.toggle('is-done', typeof step === 'number' && n < step);
     });
-    var summary = document.getElementById('orderSummary');
-    summary.hidden = !(step === 2 || step === 3);
+    summaryEl.hidden = !(step === 2 || step === 3);
+    syncSummaryPadding();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -64,6 +76,7 @@
     var hasItems = keys.length > 0;
     var toStep3 = document.getElementById('toStep3');
     if (toStep3) toStep3.disabled = !hasItems;
+    syncSummaryPadding();
     return total;
   }
 
