@@ -80,11 +80,11 @@ const pages = {
       'Practical guides on healthy eating, protein intake, meal planning and daily food logistics for professionals and families in Kolkata.',
     path: '/blog',
   },
-  corporateCatering: {
-    title: `Corporate Catering & Event Booking${suffix}`,
+  corporateOrder: {
+    title: `Order Your Meal: Corporate Cafeteria Ordering${suffix}`,
     description:
-      'Book office lunches, corporate events, training sessions and festival catering across New Town, Sector V, Salt Lake & Rajarhat. Recurring or one-off, delivered to your cafeteria.',
-    path: '/corporate-catering',
+      'Working at a partner corporate cafeteria? Pick your meal and place your order in under a minute. No login, no payment gateway required.',
+    path: '/corporate-order',
   },
 };
 

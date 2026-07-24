@@ -1,6 +1,30 @@
 # Deploying Thali & More
 
-This is a standard Node.js/Express app with no build step, no database, and file-based lead storage. Below is the setup for a Linux VPS (Ubuntu 22.04+) with PM2 + Nginx + HTTPS, which is the most common way to self-host a small Express app. A PaaS alternative is at the bottom if you'd rather not manage a server.
+This is a standard Node.js/Express app with no build step and file-based lead storage for the general contact/trial forms. The corporate meal ordering system (`/corporate-order`, `/admin`) additionally needs a Postgres database, see "Database setup" below, since cafeterias, menu items, and bookings are never hardcoded.
+
+This site is currently deployed on **Vercel**. Below is the Vercel setup first, then a Linux VPS (PM2 + Nginx) alternative for self-hosting.
+
+## Database setup (required for /corporate-order and /admin)
+
+1. Create a free Postgres database at [neon.tech](https://neon.tech) (or any Postgres provider).
+2. Copy the connection string (`postgresql://user:pass@host/dbname?sslmode=require`).
+3. Add it as `DATABASE_URL` in your environment (`.env` locally, or Vercel's Environment Variables for production).
+4. Run once against that database:
+
+```bash
+npm run db:migrate   # creates tables
+npm run db:seed      # loads the initial cafeterias + menu items
+```
+
+5. Also set `ADMIN_PASSWORD`, `COOKIE_SECRET`, and `CSRF_SECRET` (see `.env.example`; generate the two secrets with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`).
+
+On Vercel specifically: add these four variables in Project → Settings → Environment Variables, then run the migrate/seed commands from your own machine with `DATABASE_URL` set to the same Neon connection string (Vercel's serverless functions don't have a shell to run one-off scripts from).
+
+## Vercel deployment
+
+Vercel auto-deploys on every push to `main` via the GitHub integration already connected to this repo. To configure or update environment variables: Project → Settings → Environment Variables. **Important:** adding or changing an environment variable does not apply to the currently-running deployment — only a fresh deployment (a new git push, not just clicking "Redeploy" on an old build) reliably picks up the new value.
+
+## VPS alternative (self-hosting)
 
 ## 1. Prerequisites on the server
 
@@ -37,6 +61,12 @@ WHATSAPP_NUMBER=91XXXXXXXXXX
 CONTACT_PHONE_DISPLAY=+91 XXXXX XXXXX
 CONTACT_PHONE_HREF=+91XXXXXXXXXX
 CONTACT_EMAIL=hello@thaliandmore.in
+RESEND_API_KEY=re_xxxxxxxx
+LEAD_NOTIFICATION_EMAIL=legal.thaliandmore@gmail.com
+DATABASE_URL=postgresql://...
+ADMIN_PASSWORD=choose-a-strong-password
+COOKIE_SECRET=generate-with-crypto-randomBytes
+CSRF_SECRET=generate-with-crypto-randomBytes
 ```
 
 `.env` is gitignored, so this step has to happen on every server you deploy to.
@@ -117,11 +147,13 @@ pm2 restart thali-and-more
 ## Production checklist
 
 - [ ] Real `.env` values set (WhatsApp number, phone, email, `SITE_URL` matching the live domain)
-- [ ] Swap `public/images/og/thali-and-more-og.svg` for a branded 1200x630 JPG/PNG — some platforms (iMessage, some Facebook/Twitter crawlers) don't render SVG `og:image`
-- [ ] Replace the `storage/leads.json` file-append logic in `controllers/leadController.js` with a real integration (CRM, Google Sheets, email via a transactional provider) — a flat JSON file is fine for launch-week volume but isn't durable at scale and won't survive redeploys unless the `storage/` folder persists outside the app directory
-- [ ] Back up or persist `storage/leads.json` outside the deploy path if you keep the file-based approach (a `git pull` won't touch it since it's gitignored, but a fresh clone or container rebuild will lose it)
+- [ ] `DATABASE_URL`, `ADMIN_PASSWORD`, `COOKIE_SECRET`, `CSRF_SECRET` set and the database migrated + seeded (see "Database setup" above); without `CSRF_SECRET` set, tokens are regenerated randomly on every restart/redeploy, invalidating any open forms
+- [ ] `RESEND_API_KEY` and `LEAD_NOTIFICATION_EMAIL` set so contact/trial/order emails actually send, not just log to console
+- [ ] Once thaliandmore.in is a verified domain in Resend, set `RESEND_FROM_EMAIL` to a real address on that domain instead of the shared sandbox sender
+- [ ] Swap `public/images/og/thali-and-more-og.svg` for a branded 1200x630 JPG/PNG, some platforms (iMessage, some Facebook/Twitter crawlers) don't render SVG `og:image`
+- [ ] Change the default `ADMIN_PASSWORD` to something strong and unique, not reused elsewhere
 - [ ] Confirm `helmet`'s relaxed CSP (`contentSecurityPolicy: false` in `app.js`) is acceptable, or tighten it now that the final set of external resources (Google Fonts) is known
-- [ ] Set up log rotation for PM2 (`pm2 install pm2-logrotate`) so logs don't grow unbounded
+- [ ] Set up log rotation for PM2 (`pm2 install pm2-logrotate`) so logs don't grow unbounded (VPS only)
 - [ ] Confirm `sitemap.xml` and `robots.txt` resolve at the live domain and submit the sitemap in Google Search Console
 
 ## Alternative: PaaS (Render, Railway, Fly.io)

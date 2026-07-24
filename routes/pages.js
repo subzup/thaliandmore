@@ -13,6 +13,5 @@ router.get('/why-choose-us', pageController.whyChooseUs);
 router.get('/testimonials', pageController.testimonials);
 router.get('/faq', pageController.faq);
 router.get('/contact', pageController.contact);
-router.get('/corporate-catering', pageController.corporateCatering);
 
 module.exports = router;

@@ -1,0 +1,101 @@
+<div class="admin-app">
+  <%- include('../partials/admin-nav') %>
+  <h1 style="margin-bottom:1.5rem;">Menu Items</h1>
+
+  <div class="admin-card">
+    <h3 style="margin-bottom:0.75rem;">Add Menu Item</h3>
+    <form method="POST" action="/admin/menu" class="admin-menu-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <div class="admin-form-inline" style="margin-bottom:0.6rem;">
+        <select name="category">
+          <option value="main">Main</option>
+          <option value="addon">Add-on</option>
+        </select>
+        <input type="text" name="name" placeholder="Item name" required>
+      </div>
+      <input type="text" name="description" placeholder="Description (optional)" style="width:100%; margin-bottom:0.6rem; padding:0.55rem 0.75rem; border-radius:var(--radius-sm); border:1.5px solid var(--color-border);">
+      <div class="variant-rows">
+        <div class="variant-row">
+          <input type="text" name="variantLabel" placeholder="Variant label (e.g. Regular)" value="Regular">
+          <input type="number" name="variantPrice" placeholder="Price ₹" min="0">
+        </div>
+      </div>
+      <button type="button" class="btn btn--ghost add-variant-btn" style="margin-bottom:0.75rem;">+ Add another price variant</button>
+      <br>
+      <button type="submit" class="btn btn--primary btn--sm">Add Item</button>
+    </form>
+  </div>
+
+  <h2 style="margin:2rem 0 1rem;">Mains</h2>
+  <% mains.forEach(function(item) { %>
+    <div class="admin-card">
+      <form method="POST" action="/admin/menu/<%= item.id %>" class="admin-menu-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="admin-form-inline" style="margin-bottom:0.6rem;">
+          <input type="text" name="name" value="<%= item.name %>" required>
+          <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+            <input type="checkbox" name="is_active" <%= item.is_active ? 'checked' : '' %>> Active
+          </label>
+        </div>
+        <input type="text" name="description" value="<%= item.description || '' %>" placeholder="Description" style="width:100%; margin-bottom:0.6rem; padding:0.55rem 0.75rem; border-radius:var(--radius-sm); border:1.5px solid var(--color-border);">
+        <div class="variant-rows">
+          <% item.variants.forEach(function(v) { %>
+            <div class="variant-row">
+              <input type="text" name="variantLabel" value="<%= v.label %>">
+              <input type="number" name="variantPrice" value="<%= v.price %>" min="0">
+            </div>
+          <% }); %>
+        </div>
+        <button type="button" class="btn btn--ghost add-variant-btn" style="margin-bottom:0.75rem;">+ Add another price variant</button>
+        <br>
+        <button type="submit" class="btn btn--outline btn--sm">Save</button>
+      </form>
+      <form method="POST" action="/admin/menu/<%= item.id %>/delete" onsubmit="return confirm('Delete this item?');" style="margin-top:0.5rem;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn btn--sm" style="color:var(--color-danger);">Delete</button>
+      </form>
+    </div>
+  <% }); %>
+
+  <h2 style="margin:2rem 0 1rem;">Add-ons</h2>
+  <% addons.forEach(function(item) { %>
+    <div class="admin-card">
+      <form method="POST" action="/admin/menu/<%= item.id %>" class="admin-menu-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="admin-form-inline" style="margin-bottom:0.6rem;">
+          <input type="text" name="name" value="<%= item.name %>" required>
+          <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+            <input type="checkbox" name="is_active" <%= item.is_active ? 'checked' : '' %>> Active
+          </label>
+        </div>
+        <div class="variant-rows">
+          <% item.variants.forEach(function(v) { %>
+            <div class="variant-row">
+              <input type="text" name="variantLabel" value="<%= v.label %>">
+              <input type="number" name="variantPrice" value="<%= v.price %>" min="0">
+            </div>
+          <% }); %>
+        </div>
+        <button type="button" class="btn btn--ghost add-variant-btn" style="margin-bottom:0.75rem;">+ Add another price variant</button>
+        <br>
+        <button type="submit" class="btn btn--outline btn--sm">Save</button>
+      </form>
+      <form method="POST" action="/admin/menu/<%= item.id %>/delete" onsubmit="return confirm('Delete this item?');" style="margin-top:0.5rem;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn btn--sm" style="color:var(--color-danger);">Delete</button>
+      </form>
+    </div>
+  <% }); %>
+</div>
+
+<script>
+  document.querySelectorAll('.add-variant-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var rows = btn.closest('.admin-menu-form').querySelector('.variant-rows');
+      var row = document.createElement('div');
+      row.className = 'variant-row';
+      row.innerHTML = '<input type="text" name="variantLabel" placeholder="Label"><input type="number" name="variantPrice" placeholder="Price ₹" min="0">';
+      rows.appendChild(row);
+    });
+  });
+</script>

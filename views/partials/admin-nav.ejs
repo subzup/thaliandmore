@@ -1,0 +1,9 @@
+<nav class="admin-nav">
+  <a href="/admin" class="admin-nav__link">Bookings</a>
+  <a href="/admin/cafeterias" class="admin-nav__link">Cafeterias</a>
+  <a href="/admin/menu" class="admin-nav__link">Menu</a>
+  <form method="POST" action="/admin/logout" style="margin-left:auto;">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="admin-nav__link admin-nav__link--logout">Log Out</button>
+  </form>
+</nav>

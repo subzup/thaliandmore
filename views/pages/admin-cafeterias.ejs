@@ -1,0 +1,31 @@
+<div class="admin-app">
+  <%- include('../partials/admin-nav') %>
+  <h1 style="margin-bottom:1.5rem;">Cafeterias</h1>
+
+  <div class="admin-card">
+    <h3 style="margin-bottom:0.75rem;">Add Cafeteria</h3>
+    <form method="POST" action="/admin/cafeterias" class="admin-form-inline">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="text" name="name" placeholder="Cafeteria name" required>
+      <button type="submit" class="btn btn--primary btn--sm">Add</button>
+    </form>
+  </div>
+
+  <% cafeterias.forEach(function(c) { %>
+    <div class="admin-card">
+      <form method="POST" action="/admin/cafeterias/<%= c.id %>" class="admin-card__row">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="text" name="name" value="<%= c.name %>" style="flex:1; min-width:200px; padding:0.55rem 0.75rem; border-radius:var(--radius-sm); border:1.5px solid var(--color-border);">
+        <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+          <input type="checkbox" name="is_active" <%= c.is_active ? 'checked' : '' %>> Active
+        </label>
+        <button type="submit" class="btn btn--outline btn--sm">Save</button>
+      </form>
+      <form method="POST" action="/admin/cafeterias/<%= c.id %>/delete" onsubmit="return confirm('Delete this cafeteria?');" style="margin-top:0.5rem;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn btn--sm" style="color:var(--color-danger);">Delete</button>
+      </form>
+    </div>
+  <% }); %>
+  <% if (!cafeterias.length) { %><p style="color:var(--color-ink-muted);">No cafeterias yet.</p><% } %>
+</div>

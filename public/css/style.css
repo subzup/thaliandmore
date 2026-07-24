@@ -548,3 +548,90 @@ p { color: var(--color-ink-soft); }
 
 /* ---------- 23. Loading bar ---------- */
 #pageLoader { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: var(--color-primary); z-index: 999; transition: width 400ms ease, opacity 300ms ease; }
+
+/* ---------- 24. Corporate order app ---------- */
+.order-app { max-width: 640px; margin: 0 auto; padding: 1.5rem 1.25rem calc(7rem + env(safe-area-inset-bottom)); }
+.order-steps { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.75rem; }
+.order-step { font-size: 0.78rem; font-weight: 600; color: var(--color-ink-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); background: var(--color-bg); }
+.order-step.is-active { background: var(--color-primary); color: #fff; }
+.order-step.is-done { background: var(--color-primary-tint); color: var(--color-primary-dark); }
+
+.order-panel h2 { margin-bottom: 1.25rem; }
+.order-panel[hidden] { display: none; }
+
+.cafeteria-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+@media (min-width: 640px) { .cafeteria-grid { grid-template-columns: 1fr 1fr; } }
+.cafeteria-card {
+  display: flex; align-items: center; gap: 1rem; padding: 1.5rem; border-radius: var(--radius-md);
+  border: 2px solid var(--color-border); background: var(--color-white); text-align: left;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.cafeteria-card:active { transform: scale(0.98); }
+.cafeteria-card.is-selected { border-color: var(--color-primary); background: var(--color-primary-tint); }
+.cafeteria-card__icon { font-size: 1.75rem; flex-shrink: 0; }
+.cafeteria-card__name { font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem; }
+
+.food-card { border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem; }
+.food-card__icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.food-card h3 { margin-bottom: 0.25rem; }
+.food-card__desc { font-size: 0.85rem; color: var(--color-ink-muted); margin-bottom: 0.9rem; }
+.food-card__variant { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 0; }
+.food-card__variant + .food-card__variant { border-top: 1px solid var(--color-bg); }
+.food-card__variant-price { font-family: var(--font-heading); font-weight: 700; }
+.food-card__variant-label { font-size: 0.78rem; color: var(--color-ink-muted); }
+
+.qty-selector { display: flex; align-items: center; gap: 0.75rem; }
+.qty-btn {
+  width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--color-primary); color: var(--color-primary);
+  font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+.qty-btn:active { background: var(--color-primary); color: #fff; }
+.qty-btn:disabled { opacity: 0.35; border-color: var(--color-border); color: var(--color-ink-muted); }
+.qty-value { min-width: 1.5rem; text-align: center; font-weight: 700; font-family: var(--font-heading); }
+
+.order-summary {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 96; background: #fff; border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 24px rgba(26,32,44,0.1); padding: 0.9rem 1.25rem calc(0.9rem + env(safe-area-inset-bottom));
+  max-height: 60vh; overflow-y: auto; transition: transform var(--transition);
+}
+.order-summary[hidden] { display: none; }
+.order-summary__items { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.5rem; font-size: 0.85rem; }
+.order-summary__item { display: flex; justify-content: space-between; gap: 1rem; }
+.order-summary__item span:first-child { color: var(--color-ink-soft); }
+.order-summary__item span:last-child { font-weight: 600; flex-shrink: 0; }
+.order-summary__total { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; padding-top: 0.5rem; border-top: 1px solid var(--color-border); }
+.order-summary__note { font-size: 0.72rem; color: var(--color-ink-muted); margin: 0.35rem 0 0.75rem; }
+
+.order-success { text-align: center; padding: 2rem 0; }
+.order-success__icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.order-success__code { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin: 0.75rem 0; }
+
+/* ---------- 25. Admin panel ---------- */
+.admin-app { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+.admin-nav { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); flex-wrap: wrap; }
+.admin-nav__link { font-weight: 600; font-size: 0.9rem; color: var(--color-ink-soft); }
+.admin-nav__link:hover { color: var(--color-primary); }
+.admin-nav__link--logout { color: var(--color-danger); }
+
+.admin-login { max-width: 360px; margin: 4rem auto; }
+.admin-login h1 { margin-bottom: 1.5rem; text-align: center; }
+
+.admin-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.admin-table th, .admin-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.admin-table th { color: var(--color-ink-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.admin-table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+
+.status-badge { display: inline-flex; padding: 0.25rem 0.7rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; background: var(--color-bg); }
+.status-badge--New { background: var(--color-primary-tint); color: var(--color-primary-dark); }
+.status-badge--Confirmed { background: #E7F5FF; color: #1565C0; }
+.status-badge--Cancelled { background: #FFF5F5; color: var(--color-danger); }
+
+.admin-card { border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem; }
+.admin-card__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.admin-form-inline { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+.admin-form-inline input[type="text"], .admin-form-inline input[type="number"], .admin-form-inline select {
+  padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1.5px solid var(--color-border);
+}
+.variant-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+.variant-row input { width: 120px; }

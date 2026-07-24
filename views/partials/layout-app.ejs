@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('./head') %>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="navbar" id="navbar" style="position:static;">
+    <div class="container navbar__inner" style="justify-content:space-between;">
+      <a href="/" class="navbar__brand" aria-label="<%= site.name %> home">
+        <span class="navbar__logo"><%- include('./icon', { name: 'leaf' }) %></span>
+        <span class="navbar__name"><%= site.name %></span>
+      </a>
+      <a href="/" class="btn btn--outline btn--sm">Exit to Website</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <%- body %>
+  </main>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

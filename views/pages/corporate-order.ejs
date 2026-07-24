@@ -1,0 +1,119 @@
+<div class="order-app" id="orderApp" data-csrf-token="<%= csrfToken %>">
+  <div class="order-steps">
+    <span class="order-step is-active" data-step-indicator="1">1. Cafeteria</span>
+    <span class="order-step" data-step-indicator="2">2. Meal</span>
+    <span class="order-step" data-step-indicator="3">3. Details</span>
+  </div>
+
+  <!-- Step 1: Choose Cafeteria -->
+  <section class="order-panel" data-panel="1">
+    <h2>Choose Your Cafeteria</h2>
+    <div class="cafeteria-grid">
+      <% cafeterias.forEach(function(c) { %>
+        <button type="button" class="cafeteria-card" data-cafeteria-id="<%= c.id %>" data-cafeteria-name="<%= c.name %>">
+          <span class="cafeteria-card__icon">🏢</span>
+          <span class="cafeteria-card__name"><%= c.name %></span>
+        </button>
+      <% }); %>
+    </div>
+    <button type="button" class="btn btn--primary btn--block btn--lg" id="toStep2" disabled>Continue</button>
+  </section>
+
+  <!-- Step 2: Choose Meal -->
+  <section class="order-panel" data-panel="2" hidden>
+    <h2>Choose Your Meal</h2>
+    <% mains.forEach(function(item) { %>
+      <div class="food-card">
+        <div class="food-card__icon">🍽️</div>
+        <h3><%= item.name %></h3>
+        <% if (item.description) { %><p class="food-card__desc"><%= item.description %></p><% } %>
+        <% item.variants.forEach(function(v) { %>
+          <div class="food-card__variant" data-item-id="<%= item.id %>" data-variant-label="<%= v.label %>" data-price="<%= v.price %>" data-name="<%= item.name %>">
+            <div>
+              <span class="food-card__variant-price">&#8377;<%= v.price %></span>
+              <% if (item.variants.length > 1) { %><span class="food-card__variant-label"> &middot; <%= v.label %></span><% } %>
+            </div>
+            <div class="qty-selector">
+              <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease quantity">&minus;</button>
+              <span class="qty-value">0</span>
+              <button type="button" class="qty-btn" data-action="inc" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% }); %>
+
+    <% if (addons.length) { %>
+      <h3 style="margin:1.5rem 0 1rem;">Add Extra Items</h3>
+      <div class="food-card">
+        <% addons.forEach(function(item) { %>
+          <% item.variants.forEach(function(v) { %>
+            <div class="food-card__variant" data-item-id="<%= item.id %>" data-variant-label="<%= v.label %>" data-price="<%= v.price %>" data-name="<%= item.name %>">
+              <div>
+                <span class="food-card__variant-price"><%= item.name %></span>
+                <span class="food-card__variant-label"> &middot; &#8377;<%= v.price %><%= item.variants.length > 1 ? ' ('+v.label+')' : '' %></span>
+              </div>
+              <div class="qty-selector">
+                <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease quantity">&minus;</button>
+                <span class="qty-value">0</span>
+                <button type="button" class="qty-btn" data-action="inc" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+          <% }); %>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <div class="hero__ctas" style="margin-top:1.5rem;">
+      <button type="button" class="btn btn--outline" id="backToStep1">Back</button>
+      <button type="button" class="btn btn--primary" style="flex:1;" id="toStep3" disabled>Continue</button>
+    </div>
+  </section>
+
+  <!-- Step 3: Customer Details -->
+  <section class="order-panel" data-panel="3" hidden>
+    <h2>Your Details</h2>
+    <form class="lead-form" id="orderForm">
+      <div class="lead-form__row">
+        <input type="text" name="name" placeholder="Full Name *" required maxlength="100">
+      </div>
+      <div class="lead-form__row lead-form__row--split">
+        <input type="tel" name="phone" placeholder="Mobile Number *" pattern="[6-9][0-9]{9}" maxlength="10" required>
+        <input type="email" name="email" placeholder="Email Address *" required>
+      </div>
+      <div class="lead-form__row">
+        <input type="text" name="company" placeholder="Company *" required maxlength="150">
+      </div>
+      <div class="lead-form__row">
+        <textarea name="specialInstructions" rows="2" placeholder="Special Instructions (Optional)" maxlength="1000"></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg" id="submitOrderBtn">Request Booking</button>
+      <p class="lead-form__status" id="orderFormStatus" role="status" aria-live="polite"></p>
+    </form>
+    <button type="button" class="btn btn--outline btn--block" id="backToStep2" style="margin-top:0.75rem;">Back</button>
+  </section>
+
+  <!-- Success screen -->
+  <section class="order-panel order-success" data-panel="success" hidden>
+    <div class="order-success__icon">✅</div>
+    <h2>Booking Submitted Successfully</h2>
+    <p class="order-success__code" id="bookingCodeDisplay"></p>
+    <p class="lead">Thank you. Our team will contact you shortly.</p>
+    <div class="hero__ctas" style="justify-content:center; margin-top:1.5rem;">
+      <button type="button" class="btn btn--primary" id="bookAnotherBtn">Book Another Meal</button>
+      <a href="/" class="btn btn--outline">Go Home</a>
+    </div>
+  </section>
+</div>
+
+<!-- Live order summary, sticky at bottom during steps 2 and 3 -->
+<div class="order-summary" id="orderSummary" hidden>
+  <div class="order-summary__items" id="summaryItems"></div>
+  <div class="order-summary__total">
+    <span>Estimated Total</span>
+    <span id="summaryTotal">&#8377;0</span>
+  </div>
+  <p class="order-summary__note">No online payment required. Final confirmation will be shared by Thali &amp; More.</p>
+</div>
+
+<script src="/js/order.js" defer></script>

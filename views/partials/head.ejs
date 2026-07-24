@@ -3,7 +3,7 @@
 <title><%= meta.title %></title>
 <meta name="description" content="<%= meta.description %>">
 <link rel="canonical" href="<%= meta.url %>">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="<%= typeof noIndex !== 'undefined' && noIndex ? 'noindex, nofollow' : 'index, follow' %>">
 <meta name="author" content="<%= site.name %>">
 
 <!-- Open Graph -->

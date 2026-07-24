@@ -1,0 +1,55 @@
+<div class="admin-app">
+  <%- include('../partials/admin-nav') %>
+  <h1 style="margin-bottom:1.5rem;">Bookings</h1>
+  <% if (updated) { %><div class="alert alert--success">Booking status updated.</div><% } %>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Booking</th>
+          <th>Customer</th>
+          <th>Cafeteria</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Placed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bookings.forEach(function(b) { %>
+          <tr>
+            <td><strong><%= b.booking_code %></strong></td>
+            <td>
+              <%= b.customer_name %><br>
+              <span style="color:var(--color-ink-muted); font-size:0.8rem;"><%= b.phone %> &middot; <%= b.email %><br><%= b.company %></span>
+            </td>
+            <td><%= b.cafeteria_name %></td>
+            <td>
+              <% (typeof b.items === 'string' ? JSON.parse(b.items) : b.items).forEach(function(item) { %>
+                <div><%= item.name %> (<%= item.variant %>) &times;<%= item.quantity %></div>
+              <% }); %>
+              <% if (b.special_instructions) { %><div style="margin-top:0.4rem; font-style:italic; color:var(--color-ink-muted);">"<%= b.special_instructions %>"</div><% } %>
+            </td>
+            <td>&#8377;<%= b.estimated_total.toLocaleString('en-IN') %></td>
+            <td>
+              <form method="POST" action="/admin/bookings/<%= b.id %>/status" class="admin-form-inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <select name="status" onchange="this.form.submit()">
+                  <% ['New', 'Confirmed', 'Cancelled'].forEach(function(s) { %>
+                    <option value="<%= s %>" <%= b.status === s ? 'selected' : '' %>><%= s %></option>
+                  <% }); %>
+                </select>
+              </form>
+              <span class="status-badge status-badge--<%= b.status %>"><%= b.status %></span>
+            </td>
+            <td style="white-space:nowrap; font-size:0.8rem; color:var(--color-ink-muted);"><%= new Date(b.created_at).toLocaleString('en-IN') %></td>
+          </tr>
+        <% }); %>
+        <% if (!bookings.length) { %>
+          <tr><td colspan="7" style="text-align:center; color:var(--color-ink-muted);">No bookings yet.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

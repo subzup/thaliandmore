@@ -79,16 +79,6 @@ exports.contact = (req, res) => {
   });
 };
 
-exports.corporateCatering = (req, res) => {
-  res.render('pages/corporate-catering', {
-    ...baseLocals('corporateCatering'),
-    cafeterias: data.cafeterias,
-    corporateThalis: data.corporateThalis,
-    options: data.corporateCateringOptions,
-    success: req.query.success === '1',
-    error: req.query.error || null,
-  });
-};
 
 exports.notFound = (req, res) => {
   res.status(404).render('pages/404', baseLocals('notFound'));

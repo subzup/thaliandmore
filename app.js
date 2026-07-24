@@ -5,6 +5,7 @@ const path = require('path');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 
 const pageRoutes = require('./routes/pages');
@@ -12,7 +13,10 @@ const apiRoutes = require('./routes/api');
 const seoRoutes = require('./routes/seo');
 const locationRoutes = require('./routes/locations');
 const blogRoutes = require('./routes/blog');
+const orderRoutes = require('./routes/order');
+const adminRoutes = require('./routes/admin');
 const pageController = require('./controllers/pageController');
+const { ensureVisitorId } = require('./middleware/csrf');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,6 +39,8 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 // Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKIE_SECRET || 'dev-cookie-secret-change-in-production'));
+app.use(ensureVisitorId);
 
 // Static assets (1 day cache, bump in production with cache-busted filenames)
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1d' }));
@@ -44,6 +50,8 @@ app.use('/', seoRoutes);
 app.use('/api', apiRoutes);
 app.use('/', locationRoutes);
 app.use('/', blogRoutes);
+app.use('/', orderRoutes);
+app.use('/', adminRoutes);
 app.use('/', pageRoutes);
 
 // 404 handler
@@ -52,6 +60,15 @@ app.use(pageController.notFound);
 // Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
+
+  // API routes always expect JSON, including on failure, so a CSRF
+  // rejection (or any other error) shouldn't fall through to the HTML
+  // error page, which breaks client-side fetch()/JSON parsing.
+  if (req.path.startsWith('/api/')) {
+    const status = err.name === 'ForbiddenError' ? 403 : 500;
+    return res.status(status).json({ success: false, errors: [{ msg: err.name === 'ForbiddenError' ? 'Your session expired. Please refresh the page and try again.' : 'Something went wrong. Please try again.' }] });
+  }
+
   const site = require('./config/site');
   res.status(500).render('pages/500', {
     site,
