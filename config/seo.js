@@ -34,9 +34,9 @@ const pages = {
     path: '/how-it-works',
   },
   menu: {
-    title: `Weekly Menu: Daily Rotating Home-Style Meals${suffix}`,
+    title: `Our Menu: Thalis, Biryanis & Combos, Veg & Non-Veg${suffix}`,
     description:
-      'Explore our rotating weekly menu of balanced, home-style vegetarian meals, fresh daily and never frozen, prepared in our hygienic Mahishbathan kitchen.',
+      'Browse our full menu of home-style thalis, biryanis and combos, vegetarian and non-vegetarian, with prices. Cooked fresh daily in our Mahishbathan kitchen.',
     path: '/menu',
   },
   whyChooseUs: {

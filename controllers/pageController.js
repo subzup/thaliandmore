@@ -2,6 +2,7 @@
 const site = require('../config/site');
 const { buildMeta } = require('../config/seo');
 const data = require('../config/data');
+const queries = require('../db/queries');
 
 // Shared locals every page template needs
 function baseLocals(metaKey) {
@@ -43,11 +44,23 @@ exports.howItWorks = (req, res) => {
   });
 };
 
-exports.menu = (req, res) => {
-  res.render('pages/menu', {
-    ...baseLocals('menu'),
-    menu: data.menu,
-  });
+// Same live catalog the admin panel and /corporate-order draw from, so this
+// page never drifts out of sync with what's actually on offer or priced.
+exports.menu = async (req, res, next) => {
+  try {
+    const [mains, addons] = await Promise.all([
+      queries.getActiveMenuItemsByCategory('main'),
+      queries.getActiveMenuItemsByCategory('addon'),
+    ]);
+
+    res.render('pages/menu', {
+      ...baseLocals('menu'),
+      mains,
+      addons,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.whyChooseUs = (req, res) => {
