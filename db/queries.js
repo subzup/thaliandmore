@@ -58,9 +58,9 @@ exports.getMenuItemById = async (id) => {
 exports.createMenuItem = async ({ category, name, description, variants }) => {
   const { rows } = await query(
     `INSERT INTO menu_items (category, name, description, variants, sort_order)
-     VALUES ($1, $2, $3, $4, COALESCE((SELECT MAX(sort_order) + 1 FROM menu_items WHERE category = $1), 0))
+     VALUES ($1, $2, $3, $4, COALESCE((SELECT MAX(sort_order) + 1 FROM menu_items WHERE category = $5), 0))
      RETURNING *`,
-    [category, name, description, JSON.stringify(variants)]
+    [category, name, description, JSON.stringify(variants), category]
   );
   return rows[0];
 };
