@@ -435,6 +435,7 @@ p { color: var(--color-ink-soft); }
 .footer__contact a { display: flex; align-items: center; gap: 0.5rem; }
 .footer__contact .icon { width: 16px; height: 16px; color: var(--color-primary-light); }
 .footer__bottom { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; color: #94A3B8; }
+.footer__bottom p { color: inherit; }
 .footer__legal { display: flex; gap: 1.25rem; }
 
 @media (min-width: 768px) {
