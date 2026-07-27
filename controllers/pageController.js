@@ -92,6 +92,14 @@ exports.contact = (req, res) => {
   });
 };
 
+exports.corporateCateringServices = (req, res) => {
+  const cateringTestimonial = data.testimonials.find((t) => t.name === 'Sourav Chatterjee');
+  res.render('pages/corporate-catering-services', {
+    ...baseLocals('corporateCateringServices'),
+    cateringTestimonial,
+  });
+};
+
 
 exports.notFound = (req, res) => {
   res.status(404).render('pages/404', baseLocals('notFound'));

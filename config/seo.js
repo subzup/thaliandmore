@@ -86,6 +86,12 @@ const pages = {
       'Working at a partner corporate cafeteria? Pick your meal and place your order in under a minute. No login, no payment gateway required.',
     path: '/corporate-order',
   },
+  corporateCateringServices: {
+    title: `Corporate Catering Services in Kolkata${suffix}`,
+    description:
+      'Daily office lunch catering and event catering for businesses in Sector V and across Kolkata, from the same kitchen behind Thali & More. Get a custom quote.',
+    path: '/corporate-catering-services',
+  },
 };
 
 function buildMeta(key) {

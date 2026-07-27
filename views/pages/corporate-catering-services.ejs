@@ -1,0 +1,150 @@
+<div class="container">
+  <%- include('../partials/breadcrumbs', { crumbs: [{ label: 'Home', path: '/' }, { label: 'Corporate Catering Services' }] }) %>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Corporate Meal Catering",
+  "name": "Corporate Catering Services",
+  "provider": { "@type": "Organization", "name": "<%= site.name %>" },
+  "areaServed": <%- JSON.stringify(site.locales) %>,
+  "url": "<%= site.url %>/corporate-catering-services"
+}
+</script>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'building-2', cls: 'inline-icon' }) %> Corporate Catering</p>
+    <h1 data-aos="fade-up">Corporate Meal Catering for Kolkata Offices</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">
+      Daily office lunch catering and event catering, run out of the same Mahishbathan kitchen that already feeds hundreds of employees across Sector V's IT parks every day. If you're setting up catering for your team or a one-off event, this is where to start.
+    </p>
+    <div class="hero__ctas" data-aos="fade-up" data-aos-delay="150">
+      <a href="https://wa.me/<%= site.whatsapp.number %>" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+        <%- include('../partials/icon', { name: 'whatsapp', cls: 'inline-icon' }) %> Get a Catering Quote
+      </a>
+      <a href="/contact" class="btn btn--outline btn--lg">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Why Offices Choose Us</p>
+      <h2>Built on Real Catering Experience, Not a New Side Business</h2>
+    </div>
+    <div class="grid grid--3">
+      <div class="feature-card" data-aos="fade-up">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'building-2' }) %></div>
+        <h3>Years of Corporate Catering First</h3>
+        <p>We ran corporate catering for offices across Sector V's IT parks long before we ever opened individual subscriptions. Catering is where this kitchen started, not an experiment we're trying out.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'shield-check' }) %></div>
+        <h3>Consistency at Scale</h3>
+        <p>Feeding hundreds of employees on time, every working day, requires a different operational discipline than a home kitchen. That's the standard we already run on.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'sparkles' }) %></div>
+        <h3>Same Kitchen, Same Standards</h3>
+        <p>Your office catering is prepared in the same hygienic Mahishbathan kitchen as our daily subscription meals, with no separate lower-quality "bulk" process.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">How It Works</p>
+      <h2>Getting Catering Set Up for Your Office</h2>
+    </div>
+    <div class="grid grid--3">
+      <div class="feature-card" data-aos="fade-up">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'briefcase' }) %></div>
+        <h3>1. Tell Us About Your Team</h3>
+        <p>Share your team size, office location and how often you need catering, daily lunch, a recurring event, or a one-off.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'utensils' }) %></div>
+        <h3>2. We Build a Menu &amp; Quote</h3>
+        <p>We put together a menu and pricing based on your team's preferences, portion sizes and budget, then confirm a delivery schedule that fits your office hours.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'truck' }) %></div>
+        <h3>3. Reliable, Ongoing Delivery</h3>
+        <p>Once set up, catering runs on a fixed schedule your office can count on, with a direct point of contact for any changes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if (cateringTestimonial) { %>
+<section class="section">
+  <div class="container container--narrow">
+    <div class="testimonial-card testimonial-card--static" data-aos="zoom-in">
+      <div class="testimonial-card__stars">
+        <% for (let s = 0; s < cateringTestimonial.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+      </div>
+      <p class="testimonial-card__text">&ldquo;<%= cateringTestimonial.quote %>&rdquo;</p>
+      <div class="testimonial-card__author">
+        <strong><%= cateringTestimonial.name %></strong>
+        <span><%= cateringTestimonial.role %></span>
+      </div>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="section section--tint">
+  <div class="container container--narrow">
+    <div class="section__head" data-aos="fade-up">
+      <h2>Corporate Catering FAQ</h2>
+    </div>
+    <div class="accordion" data-aos="fade-up">
+      <div class="accordion__item">
+        <button type="button" class="accordion__trigger" aria-expanded="false">
+          <span>Do you cater one-time events, or only daily office lunch?</span>
+          <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+        </button>
+        <div class="accordion__panel">
+          <p>Both. We run ongoing daily office lunch catering as well as one-off events. Let us know what you need when you reach out and we'll quote accordingly.</p>
+        </div>
+      </div>
+      <div class="accordion__item">
+        <button type="button" class="accordion__trigger" aria-expanded="false">
+          <span>Which areas do you cover for corporate catering?</span>
+          <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+        </button>
+        <div class="accordion__panel">
+          <p>We currently cater to offices across New Town, Sector V, Salt Lake and Rajarhat from our Mahishbathan kitchen. If your office is just outside these areas, message us to check coverage.</p>
+        </div>
+      </div>
+      <div class="accordion__item">
+        <button type="button" class="accordion__trigger" aria-expanded="false">
+          <span>How is this different from Corporate Meal Ordering?</span>
+          <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+        </button>
+        <div class="accordion__panel">
+          <p>This page is for businesses setting up a new catering arrangement for their office. If your workplace is already one of our partner cafeterias, employees can place individual meal orders directly through <a href="/corporate-order">Corporate Meal Ordering</a>, no setup needed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container final-cta__box glass-card" data-aos="zoom-in">
+    <h2>Ready to Set Up Catering for Your Office?</h2>
+    <p>Tell us your team size and schedule, and we'll put together a custom quote.</p>
+    <div class="hero__ctas">
+      <a href="https://wa.me/<%= site.whatsapp.number %>" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+        <%- include('../partials/icon', { name: 'whatsapp', cls: 'inline-icon' }) %> Chat on WhatsApp
+      </a>
+      <a href="/contact" class="btn btn--outline btn--lg">Contact Us</a>
+    </div>
+  </div>
+</section>
