@@ -7,7 +7,8 @@
     <input type="tel" name="phone" placeholder="Mobile Number" pattern="[6-9][0-9]{9}" maxlength="10" required>
   </div>
   <div class="lead-form__row">
-    <select name="locality" required>
+    <label for="trialLocality" class="sr-only">Your Area</label>
+    <select id="trialLocality" name="locality" required>
       <option value="" disabled selected>Select Your Area</option>
       <% site.locales.forEach(function(loc) { %><option value="<%= loc %>"><%= loc %></option><% }); %>
     </select>

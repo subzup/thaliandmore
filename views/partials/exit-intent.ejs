@@ -12,7 +12,8 @@
     <form class="lead-form" id="exitIntentForm" data-endpoint="/api/trial">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" name="phone" placeholder="Mobile Number" pattern="[6-9][0-9]{9}" maxlength="10" required>
-      <select name="locality" required>
+      <label for="exitIntentLocality" class="sr-only">Your Area</label>
+      <select id="exitIntentLocality" name="locality" required>
         <option value="" disabled selected>Select Your Area</option>
         <% site.locales.forEach(function(loc) { %><option value="<%= loc %>"><%= loc %></option><% }); %>
       </select>
