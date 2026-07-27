@@ -1,3 +1,52 @@
+<!-- Schema.org: Menu, generated live from the same admin-managed data the
+     cards below render, so it can never drift out of sync with real prices -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  "name": "<%= site.name %> Menu",
+  "hasMenuSection": [
+    {
+      "@type": "MenuSection",
+      "name": "Mains",
+      "hasMenuItem": [
+        <% mains.forEach(function(item, i) { %>
+        {
+          "@type": "MenuItem",
+          "name": <%- JSON.stringify(item.name) %><% if (item.description) { %>,
+          "description": <%- JSON.stringify(item.description) %><% } %>,
+          "offers": [
+            <% item.variants.forEach(function(v, j) { %>
+            { "@type": "Offer", "price": "<%= v.price %>", "priceCurrency": "INR"<%- item.variants.length > 1 ? ', "name": ' + JSON.stringify(v.label) : '' %> }<%= j < item.variants.length - 1 ? ',' : '' %>
+            <% }); %>
+          ]
+        }<%= i < mains.length - 1 ? ',' : '' %>
+        <% }); %>
+      ]
+    }<%= addons.length ? ',' : '' %>
+    <% if (addons.length) { %>
+    {
+      "@type": "MenuSection",
+      "name": "Add-Ons",
+      "hasMenuItem": [
+        <% addons.forEach(function(item, i) { %>
+        {
+          "@type": "MenuItem",
+          "name": <%- JSON.stringify(item.name) %>,
+          "offers": [
+            <% item.variants.forEach(function(v, j) { %>
+            { "@type": "Offer", "price": "<%= v.price %>", "priceCurrency": "INR"<%- item.variants.length > 1 ? ', "name": ' + JSON.stringify(v.label) : '' %> }<%= j < item.variants.length - 1 ? ',' : '' %>
+            <% }); %>
+          ]
+        }<%= i < addons.length - 1 ? ',' : '' %>
+        <% }); %>
+      ]
+    }
+    <% } %>
+  ]
+}
+</script>
+
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'utensils', cls: 'inline-icon' }) %> Our Menu</p>

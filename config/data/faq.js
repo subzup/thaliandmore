@@ -11,9 +11,9 @@ module.exports = [
       'Absolutely. You can update your delivery address anytime as long as it falls within our service areas: New Town, Sector V, Salt Lake or Rajarhat. For a one-off change, just message us before 10 AM on the day.',
   },
   {
-    question: 'Is the food vegetarian?',
+    question: 'Do you offer both vegetarian and non-vegetarian meals?',
     answer:
-      'Yes, all our meals are 100% vegetarian and prepared without onion or garlic on request (Jain option available). We use cold-pressed oils and fresh, seasonal produce sourced daily.',
+      'Yes. Our menu includes both vegetarian thalis and non-vegetarian options like chicken and fish dishes, biryani and Chinese combos. A vegetarian-only, no onion/no garlic (Jain) option is also available on request. We use cold-pressed oils and fresh, seasonal produce sourced daily.',
   },
   {
     question: 'Do you provide dinner?',

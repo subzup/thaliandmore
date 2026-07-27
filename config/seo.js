@@ -54,7 +54,7 @@ const pages = {
   faq: {
     title: `Frequently Asked Questions${suffix}`,
     description:
-      'Answers to common questions about pausing subscriptions, delivery areas, vegetarian menus, dinner plans, and payments at Thali & More.',
+      'Answers to common questions about pausing subscriptions, delivery areas, veg and non-veg menu options, dinner plans, and payments at Thali & More.',
     path: '/faq',
   },
   contact: {

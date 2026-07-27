@@ -1,3 +1,17 @@
+<!-- Schema.org: Offer, the 7-day trial promoted throughout this page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Offer",
+  "name": "7-Day Trial",
+  "url": "<%= site.url %>/#trial",
+  "price": "<%= site.trial.price %>",
+  "priceCurrency": "INR",
+  "availability": "https://schema.org/InStock",
+  "seller": { "@type": "Organization", "name": "<%= site.name %>" }
+}
+</script>
+
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container hero__grid">
@@ -47,7 +61,7 @@
       <ul class="check-list">
         <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> No long-term contracts</li>
         <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> Delivered to home, office or PG</li>
-        <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> 100% vegetarian, home-style cooking</li>
+        <li><%- include('../partials/icon', { name: 'check-circle', cls: 'inline-icon' }) %> Home-style cooking, veg &amp; non-veg options</li>
       </ul>
     </div>
     <div class="trial-section__form glass-card" data-aos="fade-left">

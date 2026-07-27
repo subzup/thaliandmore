@@ -27,6 +27,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'partials/layout');
 
+// Available to every view without each controller passing it explicitly,
+// since the sitewide Review schema in head.ejs needs it on every page
+app.locals.siteTestimonials = require('./config/data/testimonials');
+
 // Security & performance middleware
 app.use(
   helmet({

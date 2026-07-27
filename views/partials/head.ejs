@@ -43,7 +43,7 @@
   "image": "<%= meta.ogImage %>",
   "url": "<%= site.url %>",
   "telephone": "<%= site.contact.phoneHref %>",
-  "servesCuisine": "Indian, Home-Style, Vegetarian",
+  "servesCuisine": "Indian, Home-Style, Vegetarian, Non-Vegetarian",
   "priceRange": "₹₹",
   "address": {
     "@type": "PostalAddress",
@@ -57,7 +57,43 @@
     "@type": "AggregateRating",
     "ratingValue": "<%= site.stats.avgRating %>",
     "reviewCount": "<%= site.stats.reviewCount %>"
-  }
+  },
+  "review": [
+    <% siteTestimonials.forEach(function(t, i) { %>
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": <%- JSON.stringify(t.name) %> },
+      "reviewRating": { "@type": "Rating", "ratingValue": <%= t.rating %>, "bestRating": 5 },
+      "reviewBody": <%- JSON.stringify(t.quote) %>
+    }<%= i < siteTestimonials.length - 1 ? ',' : '' %>
+    <% }); %>
+  ]
 }
 </script>
 <% } %>
+
+<!-- Schema.org: Organization (sitewide, separate from the FoodEstablishment
+     listing above, since Organization/sameAs is about the business entity
+     itself, not any one location's food-service details) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "<%= site.legalName %>",
+  "alternateName": "<%= site.name %>",
+  "url": "<%= site.url %>",
+  "logo": "<%= site.url %>/images/icons/favicon.svg",
+  "sameAs": <%- JSON.stringify(Object.values(site.socials)) %>
+}
+</script>
+
+<!-- Schema.org: WebSite (no SearchAction, this site has no internal
+     search endpoint to point one at) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "<%= site.name %>",
+  "url": "<%= site.url %>"
+}
+</script>

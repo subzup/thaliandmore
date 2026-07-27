@@ -9,7 +9,7 @@
   "name": "<%= site.name %> - <%= location.name %> Delivery",
   "url": "<%= site.url %>/locations/<%= location.slug %>",
   "telephone": "<%= site.contact.phoneHref %>",
-  "servesCuisine": "Indian, Home-Style, Vegetarian",
+  "servesCuisine": "Indian, Home-Style, Vegetarian, Non-Vegetarian",
   "priceRange": "₹₹",
   "areaServed": <%- JSON.stringify(location.name) %>,
   "address": {
@@ -123,6 +123,7 @@
       </div>
 
       <a href="/#trial" class="btn btn--primary btn--block btn--lg">Start 7-Day Trial in <%= location.name %></a>
+      <a href="/menu" class="btn btn--outline btn--block" style="margin-top:0.75rem;">See What's on the Menu</a>
     </aside>
   </div>
 </section>
