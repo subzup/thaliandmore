@@ -97,6 +97,7 @@ exports.corporateCateringServices = (req, res) => {
   res.render('pages/corporate-catering-services', {
     ...baseLocals('corporateCateringServices'),
     cateringTestimonial,
+    hideStickyTrialCta: true,
   });
 };
 

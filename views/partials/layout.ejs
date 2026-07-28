@@ -15,7 +15,9 @@
 
   <%- include('./footer') %>
   <%- include('./floating-actions') %>
-  <%- include('./sticky-cta') %>
+  <% if (typeof hideStickyTrialCta === 'undefined' || !hideStickyTrialCta) { %>
+    <%- include('./sticky-cta') %>
+  <% } %>
   <%- include('./exit-intent') %>
 
   <script src="/js/main.js" defer></script>
