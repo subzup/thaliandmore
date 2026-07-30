@@ -99,6 +99,17 @@
     </div>
 
     <aside data-aos="fade-left">
+      <div class="info-card" style="margin-bottom:1.25rem; padding:0; overflow:hidden;">
+        <h3 style="padding:1.25rem 1.25rem 0.75rem; margin-bottom:0;"><%- include('../partials/icon', { name: 'map-pin', cls: 'inline-icon' }) %> Delivery Area</h3>
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps?q=<%= encodeURIComponent(location.name + ', Kolkata, West Bengal') %>&output=embed"
+            loading="lazy"
+            title="Map of <%= location.name %>, Kolkata delivery area"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
       <div class="info-card" style="margin-bottom:1.25rem;">
         <h3><%- include('../partials/icon', { name: 'clock', cls: 'inline-icon' }) %> Delivery Details</h3>
         <ul>
