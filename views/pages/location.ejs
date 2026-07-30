@@ -86,8 +86,11 @@
               </div>
               <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
               <div class="testimonial-card__author">
-                <strong><%= t.name %></strong>
-                <span><%= t.role %></span>
+                <%- include('../partials/testimonial-avatar', { name: t.name }) %>
+                <div>
+                  <strong><%= t.name %></strong>
+                  <span><%= t.role %></span>
+                </div>
               </div>
             </div>
           <% }); %>

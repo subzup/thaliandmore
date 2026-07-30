@@ -1,0 +1,10 @@
+<%
+  // Initials avatar, not a stock photo: attaching a generic stock photo to a
+  // named real customer would misrepresent someone else's photo as theirs.
+  const _parts = name.trim().split(/\s+/);
+  const _initials = (_parts[0][0] + (_parts.length > 1 ? _parts[_parts.length - 1][0] : '')).toUpperCase();
+  const _avatarColors = ['#178050', '#14663F', '#2F855A', '#B7791F', '#2C5282', '#975A16'];
+  const _hash = name.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  const _bg = _avatarColors[_hash % _avatarColors.length];
+%>
+<div class="testimonial-avatar" style="background: <%= _bg %>;" aria-hidden="true"><%= _initials %></div>

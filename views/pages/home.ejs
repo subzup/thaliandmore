@@ -126,6 +126,37 @@
   </div>
 </section>
 
+<!-- ============ FOOD GALLERY ============ -->
+<section class="gallery section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">What's Cooking</p>
+      <h2>A Peek at What You'll Be Eating</h2>
+    </div>
+    <div class="grid grid--4">
+      <div class="gallery-item" data-aos="fade-up">
+        <img src="https://images.unsplash.com/photo-1742281257687-092746ad6021?w=500&h=500&q=80&auto=format&fit=crop" alt="Veg Thali with dal, sabzi, roti and rice" width="500" height="500" loading="lazy">
+        <span class="gallery-item__label">Veg Thali</span>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1742599361539-f096753d1100?w=500&h=500&q=80&auto=format&fit=crop" alt="Non Veg Thali with chicken curry and rice" width="500" height="500" loading="lazy">
+        <span class="gallery-item__label">Non Veg Thali</span>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://images.unsplash.com/photo-1559528896-c5310744cce8?w=500&h=500&q=80&auto=format&fit=crop" alt="Chicken Biryani with rice and spices" width="500" height="500" loading="lazy">
+        <span class="gallery-item__label">Chicken Biryani</span>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=500&h=500&q=80&auto=format&fit=crop" alt="Chinese Combo fried rice" width="500" height="500" loading="lazy">
+        <span class="gallery-item__label">Chinese Combo</span>
+      </div>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/menu" class="btn btn--ghost">See full menu <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PLANS PREVIEW ============ -->
 <section class="plans section">
   <div class="container">
@@ -202,8 +233,11 @@
             </div>
             <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
             <div class="testimonial-card__author">
-              <strong><%= t.name %></strong>
-              <span><%= t.role %></span>
+              <%- include('../partials/testimonial-avatar', { name: t.name }) %>
+              <div>
+                <strong><%= t.name %></strong>
+                <span><%= t.role %></span>
+              </div>
             </div>
           </div>
         <% }); %>
