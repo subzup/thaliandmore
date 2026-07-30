@@ -227,11 +227,6 @@
       <div class="testimonial-slider__track">
         <% testimonials.forEach(function(t) { %>
           <div class="testimonial-card">
-            <div class="testimonial-card__quote"><%- include('../partials/icon', { name: 'quote' }) %></div>
-            <div class="testimonial-card__stars">
-              <% for (let i = 0; i < t.rating; i++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
-            </div>
-            <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
             <div class="testimonial-card__author">
               <%- include('../partials/testimonial-avatar', { name: t.name }) %>
               <div>
@@ -239,6 +234,10 @@
                 <span><%= t.role %></span>
               </div>
             </div>
+            <div class="testimonial-card__stars">
+              <% for (let i = 0; i < t.rating; i++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+            </div>
+            <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
           </div>
         <% }); %>
       </div>

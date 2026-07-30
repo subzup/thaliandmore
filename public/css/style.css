@@ -287,6 +287,10 @@ p { color: var(--color-ink-soft); }
 .stat-card__value .icon { width: 32px; height: 32px; }
 .stat-card__label { font-size: 0.8rem; color: #CBD5E0; }
 .stat-card--light .stat-card__label { color: var(--color-ink-muted); }
+.about-visual__photo { width: 100%; height: auto; aspect-ratio: 7 / 5; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); margin-bottom: 1.5rem; }
+.trust-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+.trust-badge { display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1rem; background: var(--color-white); border: 1.5px solid var(--color-border); border-radius: var(--radius-full); font-weight: 600; font-size: 0.85rem; box-shadow: var(--shadow-sm); }
+.trust-badge .icon { color: var(--color-primary); flex-shrink: 0; }
 @media (min-width: 1024px) { .why-us-teaser__grid { grid-template-columns: 1fr 1fr; } }
 
 .compare-table { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-md); overflow: hidden; }
@@ -298,11 +302,9 @@ p { color: var(--color-ink-soft); }
 
 /* ---------- 11. Testimonials ---------- */
 .testimonial-card { display: flex; flex-direction: column; }
-.testimonial-card__quote { color: var(--color-primary-light); opacity: 0.4; margin-bottom: 0.75rem; }
-.testimonial-card__quote .icon { width: 32px; height: 32px; }
 .testimonial-card__stars { display: flex; gap: 0.15rem; margin-bottom: 0.9rem; }
 .testimonial-card__text { color: var(--color-ink); font-size: 0.97rem; margin-bottom: 1.25rem; flex-grow: 1; }
-.testimonial-card__author { display: flex; align-items: center; gap: 0.75rem; }
+.testimonial-card__author { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; }
 .testimonial-card__author strong { display: block; font-family: var(--font-heading); }
 .testimonial-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; }
 .testimonial-card__author span { font-size: 0.82rem; color: var(--color-ink-muted); }

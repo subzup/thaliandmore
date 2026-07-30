@@ -26,11 +26,6 @@
     <div class="grid grid--3">
       <% testimonials.forEach(function(t, i) { %>
         <div class="testimonial-card testimonial-card--static" data-aos="fade-up" data-aos-delay="<%= (i % 3) * 100 %>">
-          <div class="testimonial-card__quote"><%- include('../partials/icon', { name: 'quote' }) %></div>
-          <div class="testimonial-card__stars">
-            <% for (let s = 0; s < t.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
-          </div>
-          <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
           <div class="testimonial-card__author">
             <%- include('../partials/testimonial-avatar', { name: t.name }) %>
             <div>
@@ -38,6 +33,10 @@
               <span><%= t.role %></span>
             </div>
           </div>
+          <div class="testimonial-card__stars">
+            <% for (let s = 0; s < t.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+          </div>
+          <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
           <span class="pill pill--sm"><%= t.plan %></span>
         </div>
       <% }); %>

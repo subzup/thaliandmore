@@ -81,10 +81,6 @@
         <div class="grid grid--2">
           <% testimonials.forEach(function(t) { %>
             <div class="testimonial-card testimonial-card--static">
-              <div class="testimonial-card__stars">
-                <% for (let s = 0; s < t.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
-              </div>
-              <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
               <div class="testimonial-card__author">
                 <%- include('../partials/testimonial-avatar', { name: t.name }) %>
                 <div>
@@ -92,6 +88,10 @@
                   <span><%= t.role %></span>
                 </div>
               </div>
+              <div class="testimonial-card__stars">
+                <% for (let s = 0; s < t.rating; s++) { %><%- include('../partials/icon', { name: 'star', cls: 'icon-gold icon-sm' }) %><% } %>
+              </div>
+              <p class="testimonial-card__text">&ldquo;<%= t.quote %>&rdquo;</p>
             </div>
           <% }); %>
         </div>
