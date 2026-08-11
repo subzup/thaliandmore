@@ -244,6 +244,10 @@ p { color: var(--color-ink-soft); }
   .steps:not(.steps--vertical) .step-connector { width: auto; height: 2px; flex: 1 1 32px; min-width: 24px; }
 }
 
+.area-card { display: block; text-decoration: none; color: inherit; }
+.area-card p { color: var(--color-ink-soft); margin-bottom: 1rem; }
+.area-card__link { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; color: var(--color-primary); font-size: 0.9rem; }
+
 .gallery-item { position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 1 / 1; box-shadow: var(--shadow-sm); }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--transition); }
 .gallery-item:hover img { transform: scale(1.05); }

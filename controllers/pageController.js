@@ -21,6 +21,7 @@ exports.home = (req, res) => {
     testimonials: data.testimonials.slice(0, 3),
     faq: data.faq.slice(0, 4),
     corporateClients: data.corporateClients,
+    locations: data.locations,
     success: req.query.success === 'trial',
     error: req.query.error || null,
   });

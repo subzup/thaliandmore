@@ -244,6 +244,29 @@
   </div>
 </section>
 
+<!-- ============ DELIVERY AREAS ============ -->
+<section class="delivery-areas section section--tint">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Where We Deliver</p>
+      <h2>Serving Four Growing Neighborhoods Across Kolkata</h2>
+    </div>
+    <div class="grid grid--4">
+      <% locations.forEach(function(loc, i) { %>
+        <a href="/locations/<%= loc.slug %>" class="feature-card area-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+          <div class="feature-card__icon"><%- include('../partials/icon', { name: 'map-pin' }) %></div>
+          <h3><%= loc.name %></h3>
+          <p><%= loc.heroTagline %></p>
+          <span class="area-card__link">View <%= loc.name %> details <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></span>
+        </a>
+      <% }); %>
+    </div>
+    <div class="section__cta" data-aos="fade-up">
+      <a href="/locations" class="btn btn--ghost">See all delivery areas <%- include('../partials/icon', { name: 'arrow-right', cls: 'inline-icon' }) %></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TESTIMONIALS SLIDER ============ -->
 <section class="testimonials section">
   <div class="container">
