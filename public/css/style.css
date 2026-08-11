@@ -294,6 +294,12 @@ p { color: var(--color-ink-soft); }
 .trust-badge .icon { color: var(--color-primary); flex-shrink: 0; }
 @media (min-width: 1024px) { .why-us-teaser__grid { grid-template-columns: 1fr 1fr; } }
 
+.clients { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.clients__label { text-align: center; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-ink-muted); margin-bottom: 1.5rem; }
+.clients__grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.75rem 2.5rem; }
+.clients__logo { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; color: var(--color-ink-muted); opacity: 0.75; transition: opacity 0.2s ease, color 0.2s ease; }
+.clients__logo:hover { opacity: 1; color: var(--color-ink); }
+
 .compare-table { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-md); overflow: hidden; }
 .compare-table__row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; align-items: center; color: #E2E8F0; }
 .compare-table__row:last-child { border-bottom: none; }

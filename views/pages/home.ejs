@@ -216,6 +216,18 @@
   </div>
 </section>
 
+<!-- ============ CORPORATE CLIENTS ============ -->
+<section class="clients section">
+  <div class="container">
+    <p class="clients__label" data-aos="fade-up">Trusted by teams at</p>
+    <div class="clients__grid" data-aos="fade-up" data-aos-delay="100">
+      <% corporateClients.forEach(function(name) { %>
+        <span class="clients__logo"><%= name %></span>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TESTIMONIALS SLIDER ============ -->
 <section class="testimonials section">
   <div class="container">

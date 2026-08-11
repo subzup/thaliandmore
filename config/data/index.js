@@ -8,4 +8,5 @@ module.exports = {
   faq: require('./faq'),
   locations: require('./locations'),
   blog: require('./blog'),
+  corporateClients: require('./corporate-clients'),
 };
