@@ -20,6 +20,7 @@
   "author": "Thali & More",
   "license": "ISC",
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.7",
     "csrf-csrf": "^4.0.3",
