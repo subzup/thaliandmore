@@ -156,4 +156,80 @@ module.exports = [
     ],
     testimonialMatch: 'Rajarhat',
   },
+  {
+    slug: 'baguiati',
+    name: 'Baguiati',
+    metaTitle: 'Meal Subscription in Baguiati, Kolkata | Thali & More',
+    metaDescription:
+      'Daily home-style meal subscriptions for Baguiati, along VIP Road and the Jyangra-Chinar Park belt. Fresh lunch and dinner delivered from our Mahishbathan kitchen. 7-day trial at ₹599.',
+    heroTagline: 'Home-style meals for Baguiati, delivered along our Rajarhat route',
+    ogImage: '/images/og/og-baguiati.svg',
+    geo: { lat: 22.6168, lng: 88.4275 },
+    intro: [
+      'Baguiati borders Rajarhat and New Town to its east, which is exactly where our delivery route already runs every day. Extending it a little further down VIP Road to reach Baguiati and the Jyangra-Chinar Park belt was a natural next stop rather than a separate operation.',
+      'The area runs along VIP Road and Baguiati Main Road, with a dense mix of apartment blocks, PG accommodation and independent houses stretching toward Jyangra, Hatiara and Chinar Park. A lot of that growth is recent, which means the same "no time or space to cook properly" problem we solve in New Town shows up here too.',
+      'Because Baguiati sits directly on our existing Rajarhat-New Town corridor, we did not need to build a new delivery route from scratch to serve it, our riders already pass through the area on their regular run.',
+    ],
+    landmarks: ['VIP Road', 'Jyangra and Chinar Park', 'Baguiati Main Road', 'Near Eco Park Gate 1'],
+    idealFor: ['Families and PG residents in the Jyangra-Chinar Park belt', 'Professionals commuting along VIP Road toward Sector V or New Town', 'Anyone in newer Baguiati apartment blocks without a fully set-up kitchen'],
+    deliveryNote: 'Lunch by 1:00 PM and dinner by 8:00 PM, on the same route as our Rajarhat and New Town deliveries.',
+    distanceNote: 'Baguiati borders our existing Rajarhat delivery zone, so it runs on the same daily route rather than a separate one.',
+    localFaq: [
+      {
+        question: 'Do you deliver across all of Baguiati, including Jyangra and Chinar Park?',
+        answer: 'We cover Baguiati along VIP Road and the Jyangra-Chinar Park belt. If you are near the edge of this area, message us your exact address on WhatsApp before subscribing and we will confirm coverage the same day.',
+      },
+      {
+        question: 'I live in a PG or shared flat in Baguiati. Can you deliver there?',
+        answer: 'Yes. Just share your building name, floor and any gate or security instructions at signup so our delivery partner can reach you directly without repeated calls.',
+      },
+      {
+        question: 'My apartment is on VIP Road with heavy traffic nearby. Will that delay delivery?',
+        answer: 'Our riders already run this stretch of VIP Road daily as part of the Rajarhat-New Town route, so it is factored into our delivery windows rather than being an afterthought.',
+      },
+      {
+        question: 'I work near New Town but live in Baguiati. Can lunch and dinner go to different addresses?',
+        answer: 'Yes. Since Baguiati sits on the same route as New Town and Rajarhat, we can deliver lunch to your office and dinner to your home at no extra charge, just mention both addresses when you subscribe.',
+      },
+    ],
+    testimonialMatch: 'Baguiati',
+  },
+  {
+    slug: 'kestopur',
+    name: 'Kestopur',
+    metaTitle: 'Meal Subscription in Kestopur, Kolkata | Thali & More',
+    metaDescription:
+      'Daily home-style meal subscriptions for Kestopur and Prafulla Kanan, along VIP Road. Fresh lunch and dinner delivered from our Mahishbathan kitchen. 7-day trial at ₹599.',
+    heroTagline: 'Fresh daily meals for Kestopur and Prafulla Kanan families',
+    ogImage: '/images/og/og-kestopur.svg',
+    geo: { lat: 22.5955, lng: 88.4357 },
+    intro: [
+      'Kestopur sits just south of Baguiati along VIP Road, connected by the Baguihati flyover, close enough to our Rajarhat and New Town delivery routes that adding it was a straightforward extension rather than a new operation.',
+      'The Prafulla Kanan side of Kestopur is a settled, largely residential pocket of 2 and 3 BHK flats, the kind of neighborhood where families and working couples want a reliable daily meal without relying on restaurant food every night.',
+      'We deliver into Kestopur on the same run that already covers Baguiati, Rajarhat and New Town, so your subscription is backed by the same kitchen and delivery discipline as our longest-running localities.',
+    ],
+    landmarks: ['VIP Road', 'Prafulla Kanan and Rabindrapally', 'Baguihati flyover', 'Near Dum Dum and Patipukur rail stations'],
+    idealFor: ['Families in Prafulla Kanan and Rabindrapally', 'Working couples along the VIP Road corridor', 'Residents commuting toward Dum Dum, Patipukur or Sector V'],
+    deliveryNote: 'Lunch by 1:00 PM and dinner by 8:00 PM, on the same route as our Baguiati and Rajarhat deliveries.',
+    distanceNote: 'Kestopur sits just south of Baguiati on VIP Road, on the same delivery run as our Rajarhat and New Town localities.',
+    localFaq: [
+      {
+        question: 'Do you deliver across all of Kestopur, including Prafulla Kanan?',
+        answer: 'We cover Kestopur along VIP Road and the Prafulla Kanan-Rabindrapally area. If you are near the edge of this zone, message us your exact address on WhatsApp before subscribing and we will confirm coverage the same day.',
+      },
+      {
+        question: 'Do you deliver to independent houses in Kestopur, not just flats?',
+        answer: 'Yes, we deliver to both independent houses and apartment blocks across Kestopur at no extra charge.',
+      },
+      {
+        question: 'Can elderly parents in Kestopur subscribe if they cannot always answer the door?',
+        answer: 'Yes, this is a common request. Let us know a preferred handover instruction, such as leaving the tiffin with a building caretaker, and we will follow it consistently.',
+      },
+      {
+        question: 'I work in Sector V but live in Kestopur. Can lunch and dinner go to different addresses?',
+        answer: 'Yes. Since Kestopur is on the same route as our Sector V deliveries, we can deliver lunch to your office and dinner to your home on the same subscription, at no extra charge.',
+      },
+    ],
+    testimonialMatch: 'Kestopur',
+  },
 ];
