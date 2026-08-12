@@ -14,6 +14,36 @@
 }
 </script>
 
+<!-- FAQPage structured data, kept in sync with the accordion below -->
+<%
+  const cateringFaq = [
+    { q: 'Do you cater one-time events, or only daily office lunch?', a: "Both. We run ongoing daily office lunch catering as well as one-off events. Let us know what you need when you reach out and we'll quote accordingly." },
+    { q: 'Which areas do you cover for corporate catering?', a: 'We currently cater to offices across New Town, Sector V, Salt Lake and Rajarhat from our Mahishbathan kitchen. If your office is just outside these areas, message us to check coverage.' },
+    { q: 'How is this different from Corporate Meal Ordering?', a: 'This page is for businesses setting up a new catering arrangement for their office. If your workplace is already one of our partner cafeterias, employees can place individual meal orders directly through our Corporate Meal Ordering page, no setup needed.' },
+    { q: 'Is there a minimum team size to set up catering?', a: "Share your team size when you reach out and we'll confirm whether it works for a daily catering setup. Smaller teams and one-off events are handled case by case rather than a fixed cutoff." },
+    { q: 'Can we mix vegetarian and non-vegetarian meals in the same order?', a: 'Yes. Our menu includes both vegetarian and non-vegetarian thalis, biryanis and combos, and a single office order can mix meal types to match individual employee preferences.' },
+    { q: 'Do you provide invoices for corporate billing?', a: "Yes, we can set up recurring invoicing for your office's billing cycle. Mention your billing requirements when you reach out and we'll confirm the process during setup." },
+  ];
+%>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    <% cateringFaq.forEach(function(item, i) { %>
+    {
+      "@type": "Question",
+      "name": <%- JSON.stringify(item.q) %>,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": <%- JSON.stringify(item.a) %>
+      }
+    }<%= i < cateringFaq.length - 1 ? ',' : '' %>
+    <% }); %>
+  ]
+}
+</script>
+
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow" data-aos="fade-up"><%- include('../partials/icon', { name: 'building-2', cls: 'inline-icon' }) %> Corporate Catering</p>
@@ -82,6 +112,33 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container">
+    <div class="section__head" data-aos="fade-up">
+      <p class="eyebrow">Pricing</p>
+      <h2>Individually Boxed Meals, Priced Per Person</h2>
+      <p class="lead">The same thalis, biryanis and combos on our public menu, priced individually per employee rather than a flat per-plate event rate. Exact pricing depends on your menu selection, portion sizes and order volume.</p>
+    </div>
+    <div class="grid grid--3">
+      <div class="feature-card" data-aos="fade-up">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'utensils' }) %></div>
+        <h3>&#8377;55 &ndash; &#8377;120 per meal</h3>
+        <p>Our standard thali, biryani and combo options fall in this range per person. See the full <a href="/menu">menu with prices</a> for exact options.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'shield-check' }) %></div>
+        <h3>FSSAI-Certified Kitchen</h3>
+        <p>Every catering order is prepared in the same FSSAI-certified Mahishbathan kitchen behind our daily meal subscriptions, not a separate bulk-catering setup.</p>
+      </div>
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-card__icon"><%- include('../partials/icon', { name: 'building-2' }) %></div>
+        <h3>Custom Quote for Your Office</h3>
+        <p>Team size, menu mix and delivery frequency all affect the final number. Share your requirements on WhatsApp and we'll put together a written quote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <% if (cateringTestimonial) { %>
 <section class="section">
   <div class="container container--narrow">
@@ -130,6 +187,33 @@
         </button>
         <div class="accordion__panel">
           <p>This page is for businesses setting up a new catering arrangement for their office. If your workplace is already one of our partner cafeterias, employees can place individual meal orders directly through <a href="/corporate-order">Corporate Meal Ordering</a>, no setup needed.</p>
+        </div>
+      </div>
+      <div class="accordion__item">
+        <button type="button" class="accordion__trigger" aria-expanded="false">
+          <span>Is there a minimum team size to set up catering?</span>
+          <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+        </button>
+        <div class="accordion__panel">
+          <p>Share your team size when you reach out and we'll confirm whether it works for a daily catering setup. Smaller teams and one-off events are handled case by case rather than a fixed cutoff.</p>
+        </div>
+      </div>
+      <div class="accordion__item">
+        <button type="button" class="accordion__trigger" aria-expanded="false">
+          <span>Can we mix vegetarian and non-vegetarian meals in the same order?</span>
+          <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+        </button>
+        <div class="accordion__panel">
+          <p>Yes. Our <a href="/menu">menu</a> includes both vegetarian and non-vegetarian thalis, biryanis and combos, and a single office order can mix meal types to match individual employee preferences.</p>
+        </div>
+      </div>
+      <div class="accordion__item">
+        <button type="button" class="accordion__trigger" aria-expanded="false">
+          <span>Do you provide invoices for corporate billing?</span>
+          <%- include('../partials/icon', { name: 'chevron-down', cls: 'accordion__chevron' }) %>
+        </button>
+        <div class="accordion__panel">
+          <p>Yes, we can set up recurring invoicing for your office's billing cycle. Mention your billing requirements when you reach out and we'll confirm the process during setup.</p>
         </div>
       </div>
     </div>
