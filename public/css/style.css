@@ -407,8 +407,19 @@ p { color: var(--color-ink-soft); }
 /* ---------- 15. Floating actions + sticky mobile CTA ---------- */
 /* Below 1024px the sticky trial bar (z-index 95) sits on top of the floating
    WhatsApp/call/back-to-top buttons unless they're pushed up above its height. */
-.floating-actions { position: fixed; right: 1.1rem; bottom: calc(6.25rem + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 0.75rem; z-index: 90; }
+.floating-actions { position: fixed; right: 1.1rem; bottom: calc(6.25rem + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 0.75rem; z-index: 90; transition: opacity 200ms ease, transform 200ms ease; }
+/* Below 1024px these buttons sit on top of scrolling page text (no space is
+   reserved for them in normal flow), so while the user is actively scrolling
+   we fade them out; main.js toggles this class and restores them shortly
+   after scrolling stops. */
+@media (max-width: 1023px) {
+  .floating-actions.is-scrolling { opacity: 0; transform: translateX(12px); pointer-events: none; }
+}
 .floating-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: transform var(--transition); }
+@media (max-width: 1023px) {
+  .floating-btn { width: 46px; height: 46px; }
+  .floating-btn .icon { width: 20px; height: 20px; }
+}
 .floating-btn:hover { transform: scale(1.08); }
 .floating-btn .icon { width: 24px; height: 24px; }
 .floating-btn--whatsapp { background: #25D366; color: #fff; }

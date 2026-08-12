@@ -197,6 +197,23 @@
     });
   }
 
+  /* ---------- Floating actions: fade out while scrolling on mobile ---------- */
+  /* Below 1024px these buttons are fixed on top of page content with no
+     reserved space, so they can cover text mid-scroll. Fading them out
+     during the scroll gesture and back in once it settles keeps them out
+     of the way without hiding them for good. */
+  var floatingActions = document.querySelector('.floating-actions');
+  if (floatingActions) {
+    var scrollFadeTimer;
+    document.addEventListener('scroll', function () {
+      floatingActions.classList.add('is-scrolling');
+      clearTimeout(scrollFadeTimer);
+      scrollFadeTimer = setTimeout(function () {
+        floatingActions.classList.remove('is-scrolling');
+      }, 500);
+    }, { passive: true });
+  }
+
   /* ---------- Sticky mobile CTA: hide near footer / trial section ---------- */
   var stickyCta = document.getElementById('stickyCta');
   var trialSection = document.getElementById('trial');
