@@ -415,6 +415,13 @@ p { color: var(--color-ink-soft); }
 @media (max-width: 1023px) {
   .floating-actions.is-scrolling { opacity: 0; transform: translateX(12px); pointer-events: none; }
 }
+/* The scroll-fade above only helps while actively scrolling; at rest, long
+   paragraphs (page leads, location intros, FAQ answers) can still wrap into
+   the same fixed screen zone the buttons occupy. Reserve real clearance in
+   the text itself so there's no overlap regardless of scroll position. */
+@media (max-width: 1023px) {
+  .lead, .content-block p, .accordion__panel p { padding-right: 72px; }
+}
 .floating-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: transform var(--transition); }
 @media (max-width: 1023px) {
   .floating-btn { width: 46px; height: 46px; }
