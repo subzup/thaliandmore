@@ -49,6 +49,17 @@ app.use(ensureVisitorId);
 // Static assets (1 day cache, bump in production with cache-busted filenames)
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1d' }));
 
+// Redirect trailing-slash URLs (e.g. /about/) to their canonical no-slash form
+// with a 301, so search engines see one authoritative URL per page instead of
+// relying solely on the canonical tag to de-duplicate two crawlable URLs.
+app.use((req, res, next) => {
+  if (req.method === 'GET' && req.path.length > 1 && req.path.endsWith('/')) {
+    const query = req.url.slice(req.path.length);
+    return res.redirect(301, req.path.slice(0, -1) + query);
+  }
+  next();
+});
+
 // Routes
 app.use('/', seoRoutes);
 app.use('/api', apiRoutes);
